@@ -1,0 +1,16 @@
+.DS_Store
+.claude/
+
+# Originaldateien — zu groß für GitHub
+assets/Oreo abholung.mp4
+assets/*.HEIC
+assets/*.heic
+assets/IMG_*.jpg
+assets/IMG_*.JPG
+assets/C1F2CE0C-*.JPG
+assets/DDE297C5-*.JPG
+
+# Alte Hero-Versionen
+assets/web/hero.png
+assets/web/hero 2.jpg
+assets/web/street.jpg
