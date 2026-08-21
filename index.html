@@ -92,8 +92,8 @@ h2 i{font-style:normal;color:var(--a)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
 .dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
 .tank-wrap{position:relative;max-width:420px;margin:.75rem auto 0;display:block}
-.tank-bg{width:100%;display:block}
-.tank-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.tank-bg{width:100%;display:block;position:relative;z-index:1}
+.tank-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
 .wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
 .wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
@@ -652,8 +652,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   var canvas=document.getElementById('tank-canvas');
   if(!wrap||!canvas) return;
   var ctx=canvas.getContext('2d');
-  var L=0.172,R=0.648,T=0.228,B=0.615;
-  var LL=0.374,LT=0.420,LW=0.188,LH=0.200;
+  var L=0.172,R=0.648,T=0.228,B=0.607;
   var TARGET=0.65,fillPct=0,t=0,started=false,W=0,H=0;
   var bubbles=[];
   for(var i=0;i<18;i++) bubbles.push({x:0,y:0,r:3,vx:0,vy:0,a:0.12});
@@ -748,21 +747,6 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
           ctx.fill();
         }
       });
-      var lx=W*LL,ly=H*LT,lw=W*LW,lh=H*LH,lr=6*s;
-      ctx.globalCompositeOperation='destination-out';
-      ctx.fillStyle='rgba(0,0,0,1)';
-      ctx.beginPath();
-      ctx.moveTo(lx+lr,ly); ctx.lineTo(lx+lw-lr,ly);
-      ctx.quadraticCurveTo(lx+lw,ly,lx+lw,ly+lr);
-      ctx.lineTo(lx+lw,ly+lh-lr);
-      ctx.quadraticCurveTo(lx+lw,ly+lh,lx+lw-lr,ly+lh);
-      ctx.lineTo(lx+lr,ly+lh);
-      ctx.quadraticCurveTo(lx,ly+lh,lx,ly+lh-lr);
-      ctx.lineTo(lx,ly+lr);
-      ctx.quadraticCurveTo(lx,ly,lx+lr,ly);
-      ctx.closePath();
-      ctx.fill();
-      ctx.globalCompositeOperation='source-over';
       ctx.restore();
     }
     if(fillPct<TARGET) fillPct=Math.min(fillPct+0.003,TARGET);
