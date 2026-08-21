@@ -652,8 +652,8 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   var canvas=document.getElementById('tank-canvas');
   if(!wrap||!canvas) return;
   var ctx=canvas.getContext('2d');
-  var L=0.172,R=0.648,T=0.230,B=0.681;
-  var LL=0.374,LT=0.425,LW=0.188,LH=0.215;
+  var L=0.172,R=0.648,T=0.228,B=0.615;
+  var LL=0.374,LT=0.420,LW=0.188,LH=0.200;
   var TARGET=0.65,fillPct=0,t=0,started=false,W=0,H=0;
   var bubbles=[];
   for(var i=0;i<18;i++) bubbles.push({x:0,y:0,r:3,vx:0,vy:0,a:0.12});
@@ -682,7 +682,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
     if(fillPct>0.003){
       ctx.save();
       ctx.beginPath();
-      ctx.rect(cx-rx+3,top+4,2*rx-6,bot-top-6);
+      ctx.rect(cx-rx+1,top,2*rx-2,bot-top);
       ctx.clip();
       var grad=ctx.createLinearGradient(0,waterY,0,bot);
       grad.addColorStop(0,'rgba(90,190,255,0.80)');
@@ -771,7 +771,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   }
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting&&!started){started=true;io.disconnect();draw();}
+      if(e.isIntersecting&&!started){started=true;io.disconnect();resize();draw();}
     });
   },{threshold:0.3});
   io.observe(wrap);
