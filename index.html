@@ -91,9 +91,12 @@ h2 i{font-style:normal;color:var(--a)}
 .donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
 .dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
-.tank-wrap{position:relative;max-width:420px;margin:.75rem auto 0;display:block}
+.tank-wrap{position:relative;max-width:300px;margin:.75rem auto 0;display:block}
 .tank-bg{width:100%;display:block;position:relative;z-index:1}
 .tank-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.tank-label{position:absolute;z-index:2;left:47.5%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;background:rgba(13,13,12,0.60);border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:.55rem .9rem;white-space:nowrap}
+.tank-label-title{display:block;font-size:.5rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.tank-label-pct{display:block;font-size:1.5rem;font-weight:900;color:#fff;line-height:1;margin-top:.12rem;font-variant-numeric:tabular-nums}
 .wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
 .wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
 .wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
@@ -352,6 +355,10 @@ footer a:hover{color:var(--a)}
             <div class="tank-wrap" id="tank-wrap">
               <img src="assets/web/tank-empty.png" class="tank-bg" alt="Wassertank">
               <canvas class="tank-canvas" id="tank-canvas" aria-hidden="true"></canvas>
+              <div class="tank-label" aria-label="65 Prozent Spendenziel erreicht">
+                <span class="tank-label-title">Spendenziel</span>
+                <span class="tank-label-pct">65%</span>
+              </div>
             </div>
             <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
           </div>
@@ -652,7 +659,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   var canvas=document.getElementById('tank-canvas');
   if(!wrap||!canvas) return;
   var ctx=canvas.getContext('2d');
-  var L=0.172,R=0.648,T=0.228,B=0.607;
+  var L=0.266,R=0.684,T=0.225,B=0.775;
   var TARGET=0.65,fillPct=0,t=0,started=false,W=0,H=0;
   var bubbles=[];
   for(var i=0;i<18;i++) bubbles.push({x:0,y:0,r:3,vx:0,vy:0,a:0.12});
