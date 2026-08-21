@@ -91,12 +91,9 @@ h2 i{font-style:normal;color:var(--a)}
 .donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
 .dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
-.tank-svg-wrap{max-width:300px;margin:.75rem auto 0;color:var(--b)}
-.tank-svg{width:100%;display:block;overflow:visible}
-.tw-group{transform:translateY(146px);transition:transform 2.2s .4s cubic-bezier(.22,1,.36,1)}
-.strip.v .tw-group{transform:translateY(0)}
-.tw-wave{animation:tw-osc 3.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-@keyframes tw-osc{0%,100%{transform:scaleY(1) translateX(0)}50%{transform:scaleY(.45) translateX(4px)}}
+.tank-wrap{position:relative;max-width:420px;margin:.75rem auto 0;display:block}
+.tank-bg{width:100%;display:block}
+.tank-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
 .wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
 .wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
 .wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
@@ -216,7 +213,7 @@ footer a:hover{color:var(--a)}
   .trust-qs{padding:1.25rem}
 }
 
-.hero{background-image:url('assets/web/hero.jpg?v=2');background-size:cover;background-position:center 30%}
+.hero{background-image:url('assets/web/hero.jpg');background-size:cover;background-position:center 30%}
 </style>
 
 <nav>
@@ -352,99 +349,9 @@ footer a:hover{color:var(--a)}
           <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
           <div class="donate-viz">
             <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
-            <div class="tank-svg-wrap">
-              <svg class="tank-svg" viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <clipPath id="cyl-clip">
-                    <rect x="44" y="52" width="212" height="196"/>
-                  </clipPath>
-                  <linearGradient id="w-grd" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#E8502A" stop-opacity=".5"/>
-                    <stop offset="100%" stop-color="#E8502A" stop-opacity=".22"/>
-                  </linearGradient>
-                  <linearGradient id="g-grd" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="#000" stop-opacity=".08"/>
-                    <stop offset="9%" stop-color="#000" stop-opacity="0"/>
-                    <stop offset="91%" stop-color="#000" stop-opacity="0"/>
-                    <stop offset="100%" stop-color="#000" stop-opacity=".1"/>
-                  </linearGradient>
-                  <linearGradient id="lid-grd" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="currentColor" stop-opacity=".25"/>
-                    <stop offset="100%" stop-color="currentColor" stop-opacity=".08"/>
-                  </linearGradient>
-                </defs>
-
-                <!-- Scale markings left -->
-                <text x="37" y="56" text-anchor="end" font-size="8.5" fill="currentColor" fill-opacity=".4" font-family="system-ui,sans-serif" font-weight="600">100%</text>
-                <line x1="39" y1="52" x2="44" y2="52" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-                <text x="37" y="106" text-anchor="end" font-size="8.5" fill="currentColor" fill-opacity=".4" font-family="system-ui,sans-serif" font-weight="600">75%</text>
-                <line x1="39" y1="101" x2="44" y2="101" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-                <text x="37" y="154" text-anchor="end" font-size="8.5" fill="currentColor" fill-opacity=".4" font-family="system-ui,sans-serif" font-weight="600">50%</text>
-                <line x1="39" y1="150" x2="44" y2="150" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-                <text x="37" y="202" text-anchor="end" font-size="8.5" fill="currentColor" fill-opacity=".4" font-family="system-ui,sans-serif" font-weight="600">25%</text>
-                <line x1="39" y1="199" x2="44" y2="199" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-                <text x="37" y="252" text-anchor="end" font-size="8.5" fill="currentColor" fill-opacity=".4" font-family="system-ui,sans-serif" font-weight="600">0%</text>
-                <line x1="39" y1="248" x2="44" y2="248" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-
-                <!-- Pipe right side -->
-                <rect x="258" y="100" width="11" height="115" rx="3" fill="currentColor" fill-opacity=".18"/>
-                <path d="M258,215 Q255,238 250,240" stroke="currentColor" stroke-width="11" fill="none" stroke-opacity=".18" stroke-linecap="round"/>
-                <!-- Ladder rungs on pipe -->
-                <line x1="258" y1="115" x2="269" y2="115" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
-                <line x1="258" y1="130" x2="269" y2="130" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
-                <line x1="258" y1="145" x2="269" y2="145" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
-                <line x1="258" y1="160" x2="269" y2="160" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
-                <line x1="258" y1="175" x2="269" y2="175" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
-                <!-- Water drops from pipe -->
-                <ellipse cx="248" cy="248" rx="7" ry="3" fill="#E8502A" fill-opacity=".2"/>
-                <circle cx="248" cy="257" r="3" fill="#E8502A" fill-opacity=".18"/>
-                <circle cx="248" cy="265" r="2" fill="#E8502A" fill-opacity=".12"/>
-                <!-- Dog bowl at bottom -->
-                <path d="M232,272 Q248,281 264,272" stroke="currentColor" stroke-width="1.5" fill="none" stroke-opacity=".2"/>
-                <ellipse cx="248" cy="272" rx="17" ry="5" fill="#E8502A" fill-opacity=".12" stroke="currentColor" stroke-opacity=".18" stroke-width="1"/>
-                <text x="248" y="275" text-anchor="middle" font-size="5" fill="#E8502A" fill-opacity=".5" font-family="system-ui,sans-serif">&#x25CF;</text>
-
-                <!-- Cylinder body background -->
-                <rect x="44" y="52" width="212" height="196" fill="currentColor" fill-opacity=".02"/>
-
-                <!-- Animated water fill group (starts at bottom, rises to 73%) -->
-                <g class="tw-group">
-                  <g clip-path="url(#cyl-clip)">
-                    <!-- Water body: top=106 (73% from bottom of 248), height=142 -->
-                    <rect x="44" y="106" width="212" height="142" fill="url(#w-grd)"/>
-                    <!-- Wave on water surface -->
-                    <ellipse class="tw-wave" cx="150" cy="106" rx="114" ry="10" fill="#E8502A" fill-opacity=".42"/>
-                  </g>
-                </g>
-
-                <!-- Glass sheen overlay -->
-                <g clip-path="url(#cyl-clip)">
-                  <rect x="44" y="52" width="212" height="196" fill="url(#g-grd)"/>
-                </g>
-
-                <!-- Cylinder walls -->
-                <line x1="44" y1="52" x2="44" y2="248" stroke="currentColor" stroke-opacity=".22" stroke-width="1.5"/>
-                <line x1="256" y1="52" x2="256" y2="248" stroke="currentColor" stroke-opacity=".22" stroke-width="1.5"/>
-
-                <!-- Bottom ellipse -->
-                <ellipse cx="150" cy="248" rx="106" ry="14" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-opacity=".2" stroke-width="1.5"/>
-
-                <!-- Top lid ellipse -->
-                <ellipse cx="150" cy="52" rx="106" ry="14" fill="url(#lid-grd)" stroke="currentColor" stroke-opacity=".28" stroke-width="1.5"/>
-                <!-- Lid top highlight -->
-                <ellipse cx="150" cy="49" rx="100" ry="10" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/>
-                <!-- Cap knob -->
-                <ellipse cx="150" cy="43" rx="16" ry="6" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-opacity=".3" stroke-width="1"/>
-                <rect x="147" y="37" width="6" height="6" rx="1" fill="currentColor" fill-opacity=".2"/>
-
-                <!-- Central label plate -->
-                <rect x="96" y="128" width="108" height="74" rx="7" fill="white" fill-opacity=".93" stroke="currentColor" stroke-opacity=".07" stroke-width="1"/>
-                <!-- Water drop icon -->
-                <path d="M150,138 C150,138 143,146 143,151 C143,154.87 146.13,158 150,158 C153.87,158 157,154.87 157,151 C157,146 150,138 150,138Z" fill="#E8502A" fill-opacity=".8"/>
-                <!-- Label text -->
-                <text x="150" y="172" text-anchor="middle" font-size="7" font-weight="800" letter-spacing="1.5" fill="#888" font-family="system-ui,sans-serif">SPENDENZIEL</text>
-                <text x="150" y="195" text-anchor="middle" font-size="21" font-weight="900" fill="#E8502A" font-family="system-ui,sans-serif" letter-spacing="-.5">73%</text>
-              </svg>
+            <div class="tank-wrap" id="tank-wrap">
+              <img src="assets/web/tank-empty.png" class="tank-bg" alt="Wassertank">
+              <canvas class="tank-canvas" id="tank-canvas" aria-hidden="true"></canvas>
             </div>
             <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
           </div>
@@ -740,5 +647,136 @@ const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}});
 },{threshold:0.1});
 document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+(function(){
+  var wrap=document.getElementById('tank-wrap');
+  var canvas=document.getElementById('tank-canvas');
+  if(!wrap||!canvas) return;
+  var ctx=canvas.getContext('2d');
+  var L=0.175,R=0.615,T=0.178,B=0.695;
+  var LL=0.380,LT=0.440,LW=0.177,LH=0.170;
+  var TARGET=0.65,fillPct=0,t=0,started=false,W=0,H=0;
+  var bubbles=[];
+  for(var i=0;i<18;i++) bubbles.push({x:0,y:0,r:3,vx:0,vy:0,a:0.12});
+  function resize(){
+    var img=wrap.querySelector('img');
+    if(!img) return;
+    W=canvas.width=img.offsetWidth;
+    H=canvas.height=img.offsetHeight;
+    var cx=W*(L+R)/2,rx=W*(R-L)/2;
+    bubbles.forEach(function(b){
+      b.x=cx+(Math.random()*2-1)*rx*0.7;
+      b.y=H*T+Math.random()*(H*B-H*T);
+      b.r=(1.5+Math.random()*4.5)*(W/500);
+      b.vx=(Math.random()-0.5)*0.5*(W/500);
+      b.vy=-(0.25+Math.random()*0.7)*(W/500);
+      b.a=0.08+Math.random()*0.22;
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    if(!W||!H) return;
+    var cx=W*(L+R)/2,rx=W*(R-L)/2;
+    var top=H*T,bot=H*B,tankH=bot-top;
+    var waterY=bot-fillPct*tankH;
+    var s=W/500;
+    if(fillPct>0.003){
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(cx-rx+3,top+4,2*rx-6,bot-top-6);
+      ctx.clip();
+      var grad=ctx.createLinearGradient(0,waterY,0,bot);
+      grad.addColorStop(0,'rgba(90,190,255,0.80)');
+      grad.addColorStop(0.15,'rgba(38,140,235,0.87)');
+      grad.addColorStop(0.5,'rgba(14,85,195,0.91)');
+      grad.addColorStop(1,'rgba(4,45,148,0.95)');
+      ctx.fillStyle=grad;
+      var a1=7*s,a2=4.5*s,a3=2.5*s;
+      ctx.beginPath();
+      ctx.moveTo(cx-rx-2,bot+2);
+      ctx.lineTo(cx-rx-2,waterY);
+      for(var x=cx-rx;x<=cx+rx+1;x+=2){
+        var p=(x-cx+rx)/(rx*2);
+        var wy=a1*Math.sin(p*3.2*Math.PI+t*1.1)+a2*Math.sin(p*5.8*Math.PI-t*1.6)+a3*Math.sin(p*9.2*Math.PI+t*2.3);
+        ctx.lineTo(x,waterY+wy);
+      }
+      ctx.lineTo(cx+rx+2,bot+2);
+      ctx.closePath();
+      ctx.fill();
+      var wg=ctx.createLinearGradient(0,waterY-22*s,0,waterY+28*s);
+      wg.addColorStop(0,'rgba(170,230,255,0)');
+      wg.addColorStop(0.45,'rgba(170,230,255,0.30)');
+      wg.addColorStop(1,'rgba(90,195,255,0)');
+      ctx.fillStyle=wg;
+      ctx.beginPath();
+      ctx.moveTo(cx-rx-2,waterY-26*s);
+      for(var x=cx-rx;x<=cx+rx+1;x+=2){
+        var p=(x-cx+rx)/(rx*2);
+        var wy=a1*Math.sin(p*3.2*Math.PI+t*1.1)+a2*Math.sin(p*5.8*Math.PI-t*1.6)+a3*Math.sin(p*9.2*Math.PI+t*2.3);
+        ctx.lineTo(x,waterY+wy);
+      }
+      ctx.lineTo(cx+rx+2,waterY-26*s);
+      ctx.closePath();
+      ctx.fill();
+      for(var i=0;i<3;i++){
+        var sx=cx-rx*0.5+i*rx*0.5;
+        var sg=ctx.createLinearGradient(sx,waterY,sx,bot);
+        sg.addColorStop(0,'rgba(210,245,255,0.10)');
+        sg.addColorStop(0.6,'rgba(210,245,255,0.04)');
+        sg.addColorStop(1,'rgba(210,245,255,0)');
+        ctx.fillStyle=sg;
+        ctx.fillRect(sx-3*s,waterY,6*s,bot-waterY);
+      }
+      bubbles.forEach(function(b){
+        b.x+=b.vx; b.y+=b.vy;
+        if(b.y<waterY-b.r*2){
+          b.x=cx+(Math.random()*2-1)*rx*0.7;
+          b.y=bot-b.r;
+          b.r=(1.5+Math.random()*4.5)*s;
+          b.vx=(Math.random()-0.5)*0.6*s;
+          b.vy=-(0.3+Math.random()*0.7)*s;
+          b.a=0.08+Math.random()*0.22;
+        }
+        if(b.y>waterY&&b.y<bot){
+          ctx.beginPath();
+          ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+          ctx.strokeStyle='rgba(210,245,255,'+b.a+')';
+          ctx.lineWidth=1.2;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(b.x-b.r*0.3,b.y-b.r*0.3,b.r*0.38,0,Math.PI*2);
+          ctx.fillStyle='rgba(255,255,255,'+(b.a*1.4)+')';
+          ctx.fill();
+        }
+      });
+      var lx=W*LL,ly=H*LT,lw=W*LW,lh=H*LH,lr=6*s;
+      ctx.globalCompositeOperation='destination-out';
+      ctx.fillStyle='rgba(0,0,0,1)';
+      ctx.beginPath();
+      ctx.moveTo(lx+lr,ly); ctx.lineTo(lx+lw-lr,ly);
+      ctx.quadraticCurveTo(lx+lw,ly,lx+lw,ly+lr);
+      ctx.lineTo(lx+lw,ly+lh-lr);
+      ctx.quadraticCurveTo(lx+lw,ly+lh,lx+lw-lr,ly+lh);
+      ctx.lineTo(lx+lr,ly+lh);
+      ctx.quadraticCurveTo(lx,ly+lh,lx,ly+lh-lr);
+      ctx.lineTo(lx,ly+lr);
+      ctx.quadraticCurveTo(lx,ly,lx+lr,ly);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalCompositeOperation='source-over';
+      ctx.restore();
+    }
+    if(fillPct<TARGET) fillPct=Math.min(fillPct+0.003,TARGET);
+    t+=0.028;
+    requestAnimationFrame(draw);
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&!started){started=true;io.disconnect();draw();}
+    });
+  },{threshold:0.3});
+  io.observe(wrap);
+  window.addEventListener('resize',function(){resize();});
+  resize();
+})();
 </script>
 </html>
