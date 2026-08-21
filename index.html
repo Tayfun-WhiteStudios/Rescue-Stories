@@ -74,6 +74,10 @@ h2 i{font-style:normal;color:var(--a)}
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
 .prob-item-head{font-size:1.18rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:#F9F8F6;margin-bottom:.65rem}
 .prob-item-text{font-size:.9rem;color:rgba(249,248,246,.42);line-height:1.75}
+.trust-qs{margin:2.5rem 0;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.04)}
+.trust-intro{font-size:.82rem;color:rgba(249,248,246,.4);line-height:1.6;margin-bottom:1rem}
+.trust-q-list{display:flex;flex-direction:column;gap:.5rem}
+.trust-q{font-size:1.05rem;font-weight:700;color:rgba(249,248,246,.8);line-height:1.35}
 .prob-bridge{margin-top:3.5rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);font-size:1.05rem;font-weight:500;color:rgba(249,248,246,.5);line-height:1.72;max-width:68ch}
 .prob-bridge strong{color:#F9F8F6;font-weight:700}
 .strips{border-top:1px solid var(--br)}
@@ -84,6 +88,21 @@ h2 i{font-style:normal;color:var(--a)}
 .stitle{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;color:var(--b);padding-top:.25rem}
 .ssub{font-size:.82rem;font-weight:600;color:var(--a);margin-top:.4rem;line-height:1.35}
 .sdesc{font-size:.93rem;color:var(--mid);line-height:1.82;padding-top:.5rem}
+.donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
+.dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
+.dv-goal-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
+.dv-goal-name{font-size:.88rem;font-weight:700;color:var(--b)}
+.dv-pct{font-size:.88rem;font-weight:800;color:var(--a)}
+.dv-track{height:10px;background:var(--br);border-radius:5px;overflow:hidden;margin-bottom:.75rem}
+.dv-fill{height:100%;width:0;background:var(--a);border-radius:5px;transition:width 1.8s .3s cubic-bezier(.22,1,.36,1)}
+.strip.v .dv-fill{width:73%}
+.dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic}
+.wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
+.wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
+.wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
+.wb-item{background:var(--w);display:flex;align-items:flex-start;gap:1rem;padding:1.5rem}
+.wb-plus{font-size:1.1rem;font-weight:900;color:var(--a);line-height:1;flex-shrink:0;padding-top:.15rem}
+.wb-text{font-size:.95rem;color:var(--b);font-weight:500;line-height:1.5}
 .ep{background:#0D0D0C;padding:7rem 2rem;position:relative;overflow:hidden}
 .ep-wm{position:absolute;top:50%;right:-3%;transform:translateY(-50%);font-size:clamp(8rem,20vw,20rem);font-weight:900;letter-spacing:-.06em;color:rgba(255,255,255,.035);pointer-events:none;white-space:nowrap;line-height:1;user-select:none}
 .ep-in{max-width:1100px;margin:0 auto;position:relative}
@@ -142,6 +161,9 @@ h2 i{font-style:normal;color:var(--a)}
 .btn.acc{border-color:var(--a);color:var(--a)}
 .btn.acc:hover{background:var(--a);color:#fff;border-color:var(--a)}
 .btn:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.quote-sec{background:#0D0D0C;padding:8rem 2rem;text-align:center}
+.main-quote{font-size:clamp(1.6rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.2;color:#F9F8F6;max-width:22ch;margin:0 auto;text-wrap:balance}
+.quote-attr{display:block;margin-top:2.5rem;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--a)}
 footer{border-top:1px solid var(--br);padding:2rem;display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--mid)}
 footer a{color:inherit;text-decoration:none}
 footer a:hover{color:var(--a)}
@@ -188,6 +210,10 @@ footer a:hover{color:var(--a)}
   .khead{margin-bottom:2.5rem}
   .mm-head{margin-bottom:2.5rem}
   .vid-player iframe{max-width:100%!important}
+  .wb-list{grid-template-columns:1fr}
+  .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
+  .quote-sec{padding:5rem 1.25rem}
+  .trust-qs{padding:1.25rem}
 }
 
 .hero{background-image:url('assets/web/hero.jpg?v=2');background-size:cover;background-position:center 30%}
@@ -281,6 +307,17 @@ footer a:hover{color:var(--a)}
           <p class="prob-item-text"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
         </div>
       </div>
+      <div class="trust-qs r">
+        <p class="trust-intro">
+          <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
+          <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+        </p>
+        <div class="trust-q-list">
+          <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
+          <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
+          <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
+        </div>
+      </div>
       <p class="prob-bridge">
         <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
         <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
@@ -311,8 +348,48 @@ footer a:hover{color:var(--a)}
           <div class="stitle"><span class="de">Die neue Website</span><span class="en">The new website</span></div>
           <p class="ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
         </div>
-        <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
+        <div>
+          <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
+          <div class="donate-viz">
+            <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
+            <div class="dv-goal-row">
+              <span class="dv-goal-name"><span class="de">Ziel: Wasserversorgung</span><span class="en">Goal: Water supply</span></span>
+              <span class="dv-pct">73%</span>
+            </div>
+            <div class="dv-track"><div class="dv-fill"></div></div>
+            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="wb-block r">
+      <span class="tag de">Was bleibt</span><span class="tag en">What remains</span>
+      <h2 style="margin-bottom:.75rem">
+        <span class="de">Was nach unserem Besuch <i>wirklich bleibt.</i></span>
+        <span class="en">What truly <i>remains after our visit.</i></span>
+      </h2>
+      <p class="wb-lead">
+        <span class="de">Wenn wir abreisen, verlassen wir keine leere Bühne. Wir hinterlassen eine Organisation, die digital besser aufgestellt ist als je zuvor.</span>
+        <span class="en">When we leave, we don't leave an empty stage. We leave behind an organisation that is more digitally equipped than ever before.</span>
+      </p>
+      <ul class="wb-list">
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Eine professionelle Website, die Vertrauen schafft und Spenden generiert</span><span class="en">A professional website that builds trust and generates donations</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Hochwertiger Social-Media-Content für Wochen oder Monate im Voraus</span><span class="en">High-quality social media content for weeks or months ahead</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Zusätzliche Reichweite durch die veröffentlichte Dokumentation auf YouTube</span><span class="en">Reach through the published documentary on YouTube</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Direkte finanzielle Unterstützung durch das Sponsoring</span><span class="en">Direct financial support through sponsorship</span></span>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
@@ -530,6 +607,16 @@ footer a:hover{color:var(--a)}
         <a class="btn" href="#"><span class="de">Folgen</span><span class="en">Follow us</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="quote-sec r">
+  <div class="inn">
+    <blockquote class="main-quote">
+      <span class="de">Wir retten nicht selbst jedes Tier. Wir stärken diejenigen, die es jeden Tag versuchen.</span>
+      <span class="en">We don't rescue every animal ourselves. We strengthen those who try every day.</span>
+    </blockquote>
+    <span class="quote-attr">Rescue Stories</span>
   </div>
 </section>
 
