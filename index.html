@@ -90,13 +90,23 @@ h2 i{font-style:normal;color:var(--a)}
 .sdesc{font-size:.93rem;color:var(--mid);line-height:1.82;padding-top:.5rem}
 .donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
-.dv-goal-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
-.dv-goal-name{font-size:.88rem;font-weight:700;color:var(--b)}
-.dv-pct{font-size:.88rem;font-weight:800;color:var(--a)}
-.dv-track{height:10px;background:var(--br);border-radius:5px;overflow:hidden;margin-bottom:.75rem}
-.dv-fill{height:100%;width:0;background:var(--a);border-radius:5px;transition:width 1.8s .3s cubic-bezier(.22,1,.36,1)}
-.strip.v .dv-fill{width:73%}
-.dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic}
+.dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
+.tank-wrap{margin:.5rem 0 0}
+.tank-outer{display:flex;gap:.75rem;align-items:stretch}
+.tank-scale{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding:.4rem 0;font-size:.58rem;color:var(--mid);font-weight:600;flex-shrink:0;line-height:1}
+.tank-inner{flex:1;height:180px;border:1.5px solid var(--br);border-radius:6px;overflow:hidden;position:relative;background:var(--w)}
+.tank-water{position:absolute;bottom:0;left:0;right:0;height:0;background:rgba(232,80,42,.13);transition:height 2s .4s cubic-bezier(.22,1,.36,1)}
+.strip.v .tank-water{height:73%}
+.tank-wave1,.tank-wave2{position:absolute;top:-22px;width:210%;height:44px;border-radius:44%;background:rgba(232,80,42,.28)}
+.tank-wave1{left:-55%;animation:tw1 3.8s linear infinite}
+.tank-wave2{left:-65%;opacity:.55;background:rgba(232,80,42,.2);animation:tw2 5s linear infinite}
+@keyframes tw1{0%{transform:translateX(0)}100%{transform:translateX(47.6%)}}
+@keyframes tw2{0%{transform:translateX(0)}100%{transform:translateX(47.6%)}}
+.tank-grid-lines{position:absolute;inset:0;pointer-events:none}
+.tank-grid-line{position:absolute;left:0;right:0;height:1px;background:var(--br);opacity:.5}
+.tank-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;pointer-events:none}
+.tank-pct-num{display:block;font-size:2.2rem;font-weight:900;color:var(--a);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.tank-pct-name{display:block;font-size:.72rem;font-weight:600;color:var(--b);margin-top:.4rem;white-space:nowrap}
 .wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
 .wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
 .wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
@@ -352,12 +362,34 @@ footer a:hover{color:var(--a)}
           <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
           <div class="donate-viz">
             <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
-            <div class="dv-goal-row">
-              <span class="dv-goal-name"><span class="de">Ziel: Wasserversorgung</span><span class="en">Goal: Water supply</span></span>
-              <span class="dv-pct">73%</span>
+            <div class="tank-wrap">
+              <div class="tank-outer">
+                <div class="tank-scale">
+                  <span>100%</span>
+                  <span>75%</span>
+                  <span>50%</span>
+                  <span>25%</span>
+                  <span>0%</span>
+                </div>
+                <div class="tank-inner">
+                  <div class="tank-grid-lines">
+                    <div class="tank-grid-line" style="bottom:75%"></div>
+                    <div class="tank-grid-line" style="bottom:50%"></div>
+                    <div class="tank-grid-line" style="bottom:25%"></div>
+                  </div>
+                  <div class="tank-water">
+                    <div class="tank-wave1"></div>
+                    <div class="tank-wave2"></div>
+                  </div>
+                  <div class="tank-center">
+                    <span class="tank-pct-num">73%</span>
+                    <span class="tank-pct-name de">Wasserversorgung</span>
+                    <span class="tank-pct-name en">Water supply</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="dv-track"><div class="dv-fill"></div></div>
-            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
+            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
           </div>
         </div>
       </div>
