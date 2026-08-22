@@ -1,0 +1,858 @@
+#!/usr/bin/env python3
+import base64
+
+WEB = '/Users/tayfunb./Documents/Rescue Dog Dokumentation/assets/web'
+OUT = '/private/tmp/claude-501/-Users-tayfunb--Documents-Rescue-Dog-Dokumentation/03d18b83-9d46-4a67-adc8-8c2a1f6375ae/scratchpad/rescue-stories.html'
+LOCAL = '/Users/tayfunb./Documents/Rescue Dog Dokumentation/index.html'
+
+def b64(fn):
+    with open(f'{WEB}/{fn}', 'rb') as f:
+        return 'data:image/jpeg;base64,' + base64.b64encode(f.read()).decode()
+
+def b64png(fn):
+    with open(f'{WEB}/{fn}', 'rb') as f:
+        return 'data:image/png;base64,' + base64.b64encode(f.read()).decode()
+
+HERO    = b64('hero.jpg')
+NIGHT   = b64('oreo_night.jpg')
+DOOR    = b64('oreo_door.jpg')
+AIRPORT = b64('airport.jpg')
+COUCH   = b64('couch.jpg')
+SHELTER = b64('shelter.jpg')
+
+CSS = '''
+:root{--w:#F9F8F6;--b:#0D0D0C;--a:#E8502A;--a10:rgba(232,80,42,0.1);--mid:#717170;--br:#E5E4E0;--t:#F3F2EF;--f:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}}
+:root[data-theme="light"]{--w:#F9F8F6;--b:#0D0D0C;--br:#E5E4E0;--t:#F3F2EF;--mid:#717170}
+:root[data-theme="dark"]{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}
+:root[data-lang="en"] .de{display:none!important}
+:root[data-lang="de"] .en{display:none!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--w);color:var(--b);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,13,12,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F9F8F6;text-decoration:none}
+.logo b{color:var(--a)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.lt{display:flex;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;overflow:hidden}
+.lb{padding:.28rem .9rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:rgba(249,248,246,.55);cursor:pointer;border-radius:100px;font-family:var(--f);transition:all .18s}
+.lb.on{background:var(--a);color:#fff}
+.theme-btn{width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:rgba(249,248,246,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0}
+.theme-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.theme-btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2rem 4.5rem;position:relative;overflow:hidden;background-size:cover;background-position:center 30%}
+.hbg{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.9) 0%,rgba(13,13,12,.45) 45%,rgba(13,13,12,.38) 100%)}
+.hc{position:relative}
+.hlabel{font-size:.82rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1.75rem;line-height:1.7}
+h1{font-size:clamp(3.2rem,9.5vw,10rem);font-weight:900;line-height:.93;letter-spacing:-.045em;color:#F9F8F6;text-wrap:balance;margin-bottom:3rem}
+h1 i{font-style:normal;color:var(--a)}
+.hfoot{display:flex;align-items:flex-end;justify-content:space-between}
+.hsub{font-size:1.02rem;line-height:1.72;color:rgba(249,248,246,.65);max-width:44ch}
+.scroll-ind{display:flex;flex-direction:column;align-items:center;gap:.55rem;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(249,248,246,.4)}
+.sbar{width:1px;height:46px;background:linear-gradient(to bottom,var(--a),transparent);animation:sp 2.2s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+.mq{overflow:hidden;border-top:1px solid var(--br);border-bottom:1px solid var(--br);padding:.9rem 0;background:var(--t)}
+.mqi{display:flex;animation:mq 30s linear infinite;width:max-content}
+.mq:hover .mqi{animation-play-state:paused}
+.mqi span{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mid);padding:0 2.5rem;white-space:nowrap}
+.mqi .sep{color:var(--a);padding:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.sec{padding:7rem 2rem}.sec.t{background:var(--t)}
+.inn{max-width:1100px;margin:0 auto}
+.tag{display:block;font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:1.1rem}
+h2{font-size:clamp(2rem,5vw,4.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.06;color:var(--b);text-wrap:balance}
+h2 i{font-style:normal;color:var(--a)}
+.g-intro{max-width:720px;margin-bottom:3.5rem}
+.g-lead{font-size:1.22rem;font-weight:500;line-height:1.62;color:var(--b);margin-top:1.75rem}
+.filmstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:4rem}
+.moment{display:flex;flex-direction:column}
+.moment-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block}
+.moment-cap{padding:.75rem 0}
+.moment-num{display:block;font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--a);margin-bottom:.3rem}
+.moment-text{font-size:.82rem;color:var(--mid);line-height:1.55}
+.g-text{max-width:65ch}
+.g-body{font-size:.98rem;color:var(--mid);line-height:1.82}
+.g-body p+p{margin-top:1em}
+.qblock{margin-top:1.5rem;padding:1.25rem 1.5rem;border-left:3px solid var(--a);background:var(--a10);font-size:.98rem;font-style:italic;font-weight:500;color:var(--b);line-height:1.65}
+.vid-sec{background:#0D0D0C;padding:7rem 2rem}
+.vid-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.vid-text .tag{color:var(--a)}
+.vid-text h2{color:#F9F8F6;font-size:clamp(1.8rem,4vw,3.5rem)}
+.vid-text p{font-size:1rem;color:rgba(249,248,246,.5);line-height:1.78;margin-top:1.25rem;max-width:42ch}
+.vid-player{display:flex;justify-content:center}
+.vid-player video{width:100%;max-width:340px;aspect-ratio:9/16;display:block;object-fit:cover;background:#1a1a1a}
+.khead{max-width:760px;margin-bottom:3.5rem}
+.ksub{font-size:1.1rem;color:var(--mid);line-height:1.72;max-width:58ch;margin-top:1.2rem}
+.prob-band{background:#0D0D0C;padding:4rem;margin-bottom:0}
+.prob-band-label{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:2.5rem;display:block}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.prob-item-head{font-size:1.18rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:#F9F8F6;margin-bottom:.65rem}
+.prob-item-text{font-size:.9rem;color:rgba(249,248,246,.42);line-height:1.75}
+.trust-qs{margin:2.5rem 0;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.04)}
+.trust-intro{font-size:.82rem;color:rgba(249,248,246,.4);line-height:1.6;margin-bottom:1rem}
+.trust-q-list{display:flex;flex-direction:column;gap:.5rem}
+.trust-q{font-size:1.05rem;font-weight:700;color:rgba(249,248,246,.8);line-height:1.35}
+.prob-bridge{margin-top:3.5rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);font-size:1.05rem;font-weight:500;color:rgba(249,248,246,.5);line-height:1.72;max-width:68ch}
+.prob-bridge strong{color:#F9F8F6;font-weight:700}
+.strips{border-top:1px solid var(--br)}
+.strip{display:grid;grid-template-columns:72px 1fr 1.8fr;gap:3rem;align-items:start;padding:3rem 0;border-bottom:1px solid var(--br);transition:background .18s,padding-left .18s;cursor:default}
+.strip:hover{background:var(--t);padding-left:1.5rem}
+.snum{font-size:1.05rem;font-weight:800;letter-spacing:.02em;color:var(--br);transition:color .18s;padding-top:.35rem;font-variant-numeric:tabular-nums}
+.strip:hover .snum{color:var(--a)}
+.stitle{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;color:var(--b);padding-top:.25rem}
+.ssub{font-size:.82rem;font-weight:600;color:var(--a);margin-top:.4rem;line-height:1.35}
+.sdesc{font-size:.93rem;color:var(--mid);line-height:1.82;padding-top:.5rem}
+.donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
+.dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
+.dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
+.tank-row{margin:.75rem auto 0;display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.tank-item{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.tank-canvas{display:block;max-width:200px;width:100%}
+.tank-lbl{font-size:.52rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);text-align:center}
+.wb-block{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--br)}
+.wb-lead{font-size:1rem;color:var(--mid);max-width:52ch;line-height:1.72;margin-bottom:2rem}
+.wb-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
+.wb-item{background:var(--w);display:flex;align-items:flex-start;gap:1rem;padding:1.5rem}
+.wb-plus{font-size:1.1rem;font-weight:900;color:var(--a);line-height:1;flex-shrink:0;padding-top:.15rem}
+.wb-text{font-size:.95rem;color:var(--b);font-weight:500;line-height:1.5}
+.ep{background:#0D0D0C;padding:7rem 2rem;position:relative;overflow:hidden}
+.ep-wm{position:absolute;top:50%;right:-3%;transform:translateY(-50%);font-size:clamp(8rem,20vw,20rem);font-weight:900;letter-spacing:-.06em;color:rgba(255,255,255,.035);pointer-events:none;white-space:nowrap;line-height:1;user-select:none}
+.ep-in{max-width:1100px;margin:0 auto;position:relative}
+.ep-in .tag{color:var(--a)}
+.ep-in h2{color:#F9F8F6;margin-top:.75rem;margin-bottom:3rem}
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.ep-text .intro{font-size:1.1rem;font-weight:450;line-height:1.75;color:rgba(249,248,246,.75);margin-bottom:1.25rem}
+.ep-text .body{color:rgba(249,248,246,.45);font-size:.95rem;line-height:1.82}
+.ep-text .body p+p{margin-top:1em}
+.ep-right{display:flex;flex-direction:column;gap:2rem}
+.ep-img{position:relative;overflow:hidden}
+.ep-img img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.ep-img-cap{position:absolute;bottom:0;left:0;right:0;padding:.85rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);font-size:.68rem;font-weight:500;letter-spacing:.07em;color:rgba(255,255,255,.55)}
+.ep-meta{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.07)}
+.ep-meta-row{display:flex;justify-content:space-between;align-items:baseline;padding:.85rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.ep-meta-row:last-child{border-bottom:none}
+.em-key{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(249,248,246,.3)}
+.em-val{font-size:.92rem;font-weight:500;color:rgba(249,248,246,.8)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:3rem;border:1px solid rgba(255,255,255,.07)}
+.sbox{padding:2rem 1.5rem;border-right:1px solid rgba(255,255,255,.07)}
+.sbox:last-child{border-right:none}
+.sn{display:block;font-size:3.2rem;font-weight:900;letter-spacing:-.04em;color:var(--a);line-height:1;font-variant-numeric:tabular-nums}
+.sl{display:block;font-size:.72rem;color:rgba(249,248,246,.35);font-weight:500;letter-spacing:.06em;margin-top:.5rem}
+.sp{background:var(--t);padding:7rem 2rem;border-top:1px solid var(--br)}
+.sp-inn{max-width:1100px;margin:0 auto}
+.sp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:4rem;flex-wrap:wrap;margin-bottom:4rem}
+.sp-logo-wrap{flex-shrink:0}
+.sp-logo{height:80px;width:auto;display:block;filter:var(--logo-filter,none)}
+.sp-logo-text{font-size:1.6rem;font-weight:900;letter-spacing:-.04em;color:var(--b)}
+@media(prefers-color-scheme:dark){:root{--logo-filter:invert(1)}}
+:root[data-theme="dark"]{--logo-filter:invert(1)}
+:root[data-theme="light"]{--logo-filter:none}
+.sp-intro{max-width:52ch}
+.sp-intro p{font-size:1rem;color:var(--mid);line-height:1.78}
+.sp-contrib{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
+.sp-item{background:var(--w);padding:2.25rem}
+.sp-item-num{font-size:.65rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:.85rem}
+.sp-item-title{font-size:1.08rem;font-weight:800;letter-spacing:-.02em;color:var(--b);line-height:1.25;margin-bottom:.6rem}
+.sp-item-desc{font-size:.88rem;color:var(--mid);line-height:1.72}
+.mm-head{margin-bottom:3.5rem}
+.mm-sub{font-size:1rem;color:var(--mid);max-width:48ch;line-height:1.72;margin-top:1rem}
+.cards{display:grid;grid-template-columns:2fr 1fr 1fr;gap:1px;background:var(--br);border:1px solid var(--br)}
+.card{background:var(--w);padding:2.5rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
+.card:hover{background:var(--t)}
+.card.feat{background:#0D0D0C}
+.card.feat:hover{background:#181817}
+.card-tag{font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--a)}
+.card h3{font-size:1.3rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;color:var(--b)}
+.card.feat h3{color:#F9F8F6}
+.card p{font-size:.9rem;color:var(--mid);line-height:1.72;flex:1}
+.card.feat p{color:rgba(249,248,246,.45)}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.35rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--b);color:var(--b);background:transparent;text-decoration:none;cursor:pointer;font-family:var(--f);transition:all .18s;align-self:flex-start}
+.btn:hover{background:var(--b);color:var(--w)}
+.btn.inv{border-color:rgba(249,248,246,.35);color:#F9F8F6}
+.btn.inv:hover{background:#F9F8F6;color:#0D0D0C;border-color:#F9F8F6}
+.btn.acc{border-color:var(--a);color:var(--a)}
+.btn.acc:hover{background:var(--a);color:#fff;border-color:var(--a)}
+.btn:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.quote-sec{background:#0D0D0C;padding:8rem 2rem;text-align:center}
+.main-quote{font-size:clamp(1.6rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.2;color:#F9F8F6;max-width:22ch;margin:0 auto;text-wrap:balance}
+.quote-attr{display:block;margin-top:2.5rem;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--a)}
+footer{border-top:1px solid var(--br);padding:2rem;display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--mid)}
+footer a{color:inherit;text-decoration:none}
+footer a:hover{color:var(--a)}
+.r{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.r.v{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}.sbar,.mqi{animation:none}}
+@media(max-width:780px){
+  nav{padding:.85rem 1.25rem}
+  .hero{padding:0 1.25rem 3.5rem}
+  .sec,.ep,.sp,.vid-sec{padding:4rem 1.25rem}
+  footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.75rem;text-align:center}
+  .filmstrip{grid-template-columns:repeat(2,1fr)}
+  .prob-band{padding:3rem 1.25rem}
+  .prob-grid{grid-template-columns:1fr}
+  .strip{grid-template-columns:1fr;gap:.5rem;padding:2rem 0}
+  .snum{font-size:.85rem}
+  .ep-grid,.vid-inner{grid-template-columns:1fr;gap:2.5rem}
+  .ep-wm{display:none}
+  .stats{grid-template-columns:1fr}
+  .sbox{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .sbox:last-child{border-bottom:none}
+  .cards{grid-template-columns:1fr}
+  .sp-head{flex-direction:column-reverse;gap:2rem}
+  .sp-contrib{grid-template-columns:1fr}
+  .hfoot{flex-direction:column;align-items:flex-start;gap:2rem}
+  h1{font-size:clamp(1.5rem,7.5vw,3rem);margin-bottom:2rem}
+  h2{font-size:clamp(1.5rem,7vw,2.5rem)}
+  .hlabel{margin-bottom:1rem}
+  .hsub{font-size:.92rem;line-height:1.65}
+  .ksub,.mm-sub{font-size:.95rem}
+  .g-lead{font-size:1.05rem}
+  .g-body{font-size:.93rem}
+  .stitle{font-size:1.2rem}
+  .sdesc{font-size:.88rem}
+  .prob-item-head{font-size:1.05rem}
+  .prob-item-text{font-size:.85rem}
+  .ep-text .intro{font-size:1rem}
+  .ep-text .body{font-size:.9rem}
+  .sn{font-size:2.6rem}
+  .sp-logo{height:56px}
+  .sp-item{padding:1.75rem}
+  .sp-item-title{font-size:1rem}
+  .khead{margin-bottom:2.5rem}
+  .mm-head{margin-bottom:2.5rem}
+  .vid-player iframe{max-width:100%!important}
+  .wb-list{grid-template-columns:1fr}
+  .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
+  .quote-sec{padding:5rem 1.25rem}
+  .trust-qs{padding:1.25rem}
+}
+'''
+
+JS = '''
+function setL(l){
+  document.documentElement.dataset.lang=l;
+  document.getElementById('bd').classList.toggle('on',l==='de');
+  document.getElementById('be').classList.toggle('on',l==='en');
+}
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  document.getElementById('icon-sun').style.display=t==='dark'?'block':'none';
+  document.getElementById('icon-moon').style.display=t==='light'?'block':'none';
+}
+function toggleTheme(){
+  const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  applyTheme(next);
+  localStorage.setItem('rs-theme',next);
+}
+(function(){
+  const saved=localStorage.getItem('rs-theme');
+  const sys=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  applyTheme(saved||sys);
+})();
+document.documentElement.dataset.lang='de';
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+(function(){
+  var cv=document.getElementById('tank-canvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=240,H=240,CX=120,CY=120,R=100;
+  cv.width=W; cv.height=H;
+  var TARGET=0.65,fill=0,t=0,started=false;
+  function wave(x){var p=(x-(CX-R))/(R*2);return 1.9*Math.sin(p*1.8*Math.PI+t*0.36)+1.1*Math.sin(p*3.4*Math.PI-t*0.58)+0.55*Math.sin(p*5.9*Math.PI+t*0.84);}
+  var bubs=[];
+  function newBub(init){var sy=init?(CY+R-Math.random()*(R*1.8)):(CY+R-4);return{x:CX+(Math.random()*2-1)*R*0.58,y:sy,r:0.5+Math.random()*2.0,vx:(Math.random()-0.5)*0.12,vy:-(0.06+Math.random()*0.22),a:0.07+Math.random()*0.14,ph:Math.random()*Math.PI*2};}
+  for(var i=0;i<14;i++) bubs.push(newBub(true));
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    fill+=(TARGET-fill)*0.010;
+    var waterY=CY+R*(1-fill*2);
+    var bd=ctx.createRadialGradient(CX,CY,R-14,CX,CY,R+22);
+    bd.addColorStop(0,'rgba(255,255,255,0)');bd.addColorStop(0.55,'rgba(255,255,255,0.025)');bd.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.beginPath();ctx.arc(CX,CY,R+22,0,Math.PI*2);ctx.fillStyle=bd;ctx.fill();
+    ctx.save();
+    ctx.beginPath();ctx.arc(CX,CY,R-1,0,Math.PI*2);ctx.clip();
+    var bg=ctx.createRadialGradient(CX,CY-R*0.3,4,CX,CY,R*1.1);
+    bg.addColorStop(0,'#0e1928');bg.addColorStop(0.6,'#090f1e');bg.addColorStop(1,'#040810');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    if(fill>0.006){
+      var wg=ctx.createLinearGradient(0,waterY,0,CY+R+2);
+      wg.addColorStop(0,'rgba(36,115,195,0.82)');wg.addColorStop(0.08,'rgba(18,76,162,0.90)');wg.addColorStop(0.45,'rgba(7,46,128,0.95)');wg.addColorStop(1,'rgba(2,22,80,0.99)');
+      ctx.beginPath();ctx.moveTo(CX-R-2,CY+R+4);ctx.lineTo(CX-R-2,waterY);
+      for(var x=CX-R;x<=CX+R+1;x+=1){ctx.lineTo(x,waterY+wave(x));}
+      ctx.lineTo(CX+R+2,CY+R+4);ctx.closePath();ctx.fillStyle=wg;ctx.fill();
+      var sg=ctx.createLinearGradient(0,waterY-10,0,waterY+18);
+      sg.addColorStop(0,'rgba(180,225,255,0)');sg.addColorStop(0.38,'rgba(180,225,255,0.11)');sg.addColorStop(1,'rgba(100,185,255,0)');
+      ctx.fillStyle=sg;ctx.beginPath();ctx.moveTo(CX-R-2,waterY-12);ctx.lineTo(CX-R-2,waterY);
+      for(var x=CX-R;x<=CX+R+1;x+=1){ctx.lineTo(x,waterY+wave(x));}
+      ctx.lineTo(CX+R+2,waterY-12);ctx.closePath();ctx.fill();
+      var reflX=CX+Math.sin(t*0.14)*R*0.55;
+      var rg2=ctx.createRadialGradient(reflX,waterY+1,0,reflX,waterY+1,R*0.55);
+      rg2.addColorStop(0,'rgba(255,255,255,0.09)');rg2.addColorStop(0.5,'rgba(200,235,255,0.04)');rg2.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=rg2;ctx.fillRect(CX-R,waterY-4,R*2,28);
+      var dv=ctx.createLinearGradient(0,waterY,0,waterY+R*0.18);
+      dv.addColorStop(0,'rgba(0,5,20,0.28)');dv.addColorStop(1,'rgba(0,5,20,0)');
+      ctx.fillStyle=dv;ctx.fillRect(CX-R,waterY,R*2,R*0.2);
+      bubs.forEach(function(b){
+        b.x+=b.vx+Math.sin(t*1.1+b.ph)*0.10;b.y+=b.vy;
+        if(b.y<waterY-b.r*3||b.y>CY+R){var nb=newBub(false);b.x=nb.x;b.y=nb.y;b.r=nb.r;b.vx=nb.vx;b.vy=nb.vy;b.a=nb.a;}
+        if(b.y>waterY&&b.y<CY+R){
+          ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+          ctx.strokeStyle='rgba(200,238,255,'+b.a+')';ctx.lineWidth=0.6;ctx.stroke();
+          if(b.r>1.0){ctx.beginPath();ctx.arc(b.x-b.r*0.32,b.y-b.r*0.30,b.r*0.28,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+(b.a*1.4)+')';ctx.fill();}
+        }
+      });
+    }
+    var gl=ctx.createRadialGradient(CX-R+8,CY-12,0,CX-R+6,CY,R*0.38);
+    gl.addColorStop(0,'rgba(255,255,255,0.07)');gl.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
+    ctx.restore();
+    ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=6;ctx.stroke();
+    ctx.beginPath();ctx.arc(CX,CY,R-3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.arc(CX,CY,R+3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(CX,CY);ctx.rotate(-Math.PI/2);
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='rgba(232,80,42,0.22)';ctx.lineWidth=11;ctx.lineCap='round';ctx.stroke();
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='#E8502A';ctx.lineWidth=5;ctx.lineCap='round';ctx.stroke();
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='rgba(255,155,85,0.42)';ctx.lineWidth=1.5;ctx.lineCap='round';ctx.stroke();
+    var ex=R*Math.cos(Math.PI*2*fill),ey=R*Math.sin(Math.PI*2*fill);
+    var eg=ctx.createRadialGradient(ex,ey,0,ex,ey,7);
+    eg.addColorStop(0,'rgba(255,190,130,0.75)');eg.addColorStop(0.5,'rgba(232,80,42,0.35)');eg.addColorStop(1,'rgba(232,80,42,0)');
+    ctx.beginPath();ctx.arc(ex,ey,7,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
+    ctx.beginPath();ctx.arc(ex,ey,2.8,0,Math.PI*2);ctx.fillStyle='rgba(255,215,175,0.96)';ctx.fill();
+    ctx.restore();
+    ctx.beginPath();ctx.arc(CX,CY,R,-Math.PI*0.78,-Math.PI*0.22);
+    var tg=ctx.createLinearGradient(CX-R*0.65,CY-R,CX+R*0.65,CY-R);
+    tg.addColorStop(0,'rgba(255,255,255,0)');tg.addColorStop(0.4,'rgba(255,255,255,0.12)');tg.addColorStop(0.6,'rgba(255,255,255,0.05)');tg.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.strokeStyle=tg;ctx.lineWidth=2.5;ctx.stroke();
+    t+=0.022;requestAnimationFrame(frame);
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting&&!started){started=true;io.disconnect();requestAnimationFrame(frame);}});
+  },{threshold:0.3});
+  io.observe(cv);
+})();
+(function(){
+  var cv=document.getElementById('food-canvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=240,H=240,CX=120,CY=120,R=100;
+  cv.width=W; cv.height=H;
+  var TARGET=0.40,fill=0,t=0,started=false;
+  function easeOutBounce(x){var n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d){x-=1.5/d;return n*x*x+0.75;}if(x<2.5/d){x-=2.25/d;return n*x*x+0.9375;}x-=2.625/d;return n*x*x+0.984375;}
+  var KR=6,vSp=KR*1.88,hSp=KR*2.18,allK=[];
+  for(var row=0;row<20;row++){var baseY=CY+R-KR-4-row*vSp;var xOff=(row%2)*hSp*0.5;for(var col=-7;col<=7;col++){var kx=CX+col*hSp+xOff+(Math.random()-0.5)*2.5;var ky=baseY+(Math.random()-0.5)*2.5;var dist=Math.sqrt((kx-CX)*(kx-CX)+(ky-CY)*(ky-CY));if(dist+KR<R-5){allK.push({fx:kx,fy:ky,r:KR-1.5+Math.random()*2.8,rot:(Math.random()-0.5)*0.5,sh:Math.random()});}}}
+  allK.sort(function(a,b){return b.fy-a.fy;});
+  var active=[];
+  function spawnK(tmpl){active.push({x:tmpl.fx,fy:tmpl.fy,cy:tmpl.fy-115,r:tmpl.r,rot:tmpl.rot,sh:tmpl.sh,p:0});}
+  function drawK(k){
+    ctx.save();ctx.translate(k.x,k.cy);ctx.rotate(k.rot);
+    ctx.beginPath();ctx.ellipse(0,k.r*0.52,k.r*0.72,k.r*0.20,0,0,Math.PI*2);ctx.fillStyle='rgba(0,0,0,0.32)';ctx.fill();
+    var s=k.sh;var g=ctx.createRadialGradient(-k.r*0.22,-k.r*0.26,0,0,0,k.r*1.05);
+    g.addColorStop(0,'rgb('+(230+Math.round(s*15))+','+(138+Math.round(s*20))+','+(22+Math.round(s*18))+')');
+    g.addColorStop(0.52,'rgb('+(182+Math.round(s*14))+','+(96+Math.round(s*16))+','+(15+Math.round(s*12))+')');
+    g.addColorStop(1,'rgb('+(105+Math.round(s*18))+','+(58+Math.round(s*12))+','+(8+Math.round(s*8))+')');
+    ctx.beginPath();ctx.ellipse(0,0,k.r,k.r*0.63,0,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    ctx.beginPath();ctx.ellipse(-k.r*0.26,-k.r*0.28,k.r*0.20,k.r*0.12,-0.4,0,Math.PI*2);ctx.fillStyle='rgba(255,240,205,0.40)';ctx.fill();
+    ctx.restore();
+  }
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    fill+=(TARGET-fill)*0.010;
+    var show=Math.floor(allK.length*(fill/TARGET));
+    while(active.length<show&&active.length<allK.length) spawnK(allK[active.length]);
+    var od=ctx.createRadialGradient(CX,CY,R-14,CX,CY,R+22);od.addColorStop(0,'rgba(255,255,255,0)');od.addColorStop(0.55,'rgba(255,255,255,0.022)');od.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.beginPath();ctx.arc(CX,CY,R+22,0,Math.PI*2);ctx.fillStyle=od;ctx.fill();
+    ctx.save();ctx.beginPath();ctx.arc(CX,CY,R-1,0,Math.PI*2);ctx.clip();
+    var bg=ctx.createRadialGradient(CX,CY-R*0.3,4,CX,CY,R*1.1);bg.addColorStop(0,'#0e1928');bg.addColorStop(0.6,'#090f1e');bg.addColorStop(1,'#040810');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    active.forEach(function(k){k.p=Math.min(1,k.p+0.055);k.cy=k.fy-115*(1-easeOutBounce(k.p));drawK(k);});
+    if(active.length>0){var pt=Math.min.apply(null,active.map(function(k){return k.cy-k.r;}));var wg=ctx.createLinearGradient(0,pt-8,0,pt+20);wg.addColorStop(0,'rgba(220,130,30,0)');wg.addColorStop(0.45,'rgba(220,130,30,0.07)');wg.addColorStop(1,'rgba(220,130,30,0)');ctx.fillStyle=wg;ctx.fillRect(CX-R,pt-10,R*2,32);}
+    var gl=ctx.createRadialGradient(CX-R+8,CY-12,0,CX-R+6,CY,R*0.38);gl.addColorStop(0,'rgba(255,255,255,0.07)');gl.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
+    ctx.restore();
+    ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=6;ctx.stroke();
+    ctx.beginPath();ctx.arc(CX,CY,R-3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.arc(CX,CY,R+3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(CX,CY);ctx.rotate(-Math.PI/2);
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='rgba(232,80,42,0.22)';ctx.lineWidth=11;ctx.lineCap='round';ctx.stroke();
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='#E8502A';ctx.lineWidth=5;ctx.lineCap='round';ctx.stroke();
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2*fill);ctx.strokeStyle='rgba(255,155,85,0.42)';ctx.lineWidth=1.5;ctx.lineCap='round';ctx.stroke();
+    var ex=R*Math.cos(Math.PI*2*fill),ey=R*Math.sin(Math.PI*2*fill);
+    var eg=ctx.createRadialGradient(ex,ey,0,ex,ey,7);eg.addColorStop(0,'rgba(255,190,130,0.75)');eg.addColorStop(0.5,'rgba(232,80,42,0.35)');eg.addColorStop(1,'rgba(232,80,42,0)');
+    ctx.beginPath();ctx.arc(ex,ey,7,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
+    ctx.beginPath();ctx.arc(ex,ey,2.8,0,Math.PI*2);ctx.fillStyle='rgba(255,215,175,0.96)';ctx.fill();
+    ctx.restore();
+    ctx.beginPath();ctx.arc(CX,CY,R,-Math.PI*0.78,-Math.PI*0.22);
+    var tg=ctx.createLinearGradient(CX-R*0.65,CY-R,CX+R*0.65,CY-R);tg.addColorStop(0,'rgba(255,255,255,0)');tg.addColorStop(0.4,'rgba(255,255,255,0.12)');tg.addColorStop(0.6,'rgba(255,255,255,0.05)');tg.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.strokeStyle=tg;ctx.lineWidth=2.5;ctx.stroke();
+    t+=0.022;requestAnimationFrame(frame);
+  }
+  var io2=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting&&!started){started=true;io2.disconnect();requestAnimationFrame(frame);}});
+  },{threshold:0.3});
+  io2.observe(cv);
+})();
+'''
+
+def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src, video_src, logo_src=None):
+    return f'''<title>Rescue Stories — Ein Dokumentationsprojekt</title>
+
+<style>
+{CSS}
+.hero{{background-image:url('{hero_src}');background-size:cover;background-position:center 30%}}
+</style>
+
+<nav>
+  <a class="logo" href="#">Rescue <b>Stories</b></a>
+  <div class="nav-right">
+    <div class="lt" role="group" aria-label="Sprache / Language">
+      <button class="lb on" id="bd" onclick="setL('de')">DE</button>
+      <button class="lb" id="be" onclick="setL('en')">EN</button>
+    </div>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Theme wechseln">
+      <svg id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hbg" aria-hidden="true"></div>
+  <div class="hc">
+    <p class="hlabel"><span class="de">Über Rescue Organisations weltweit</span><span class="en">About rescue organisations worldwide</span></p>
+    <h1>
+      <span class="de">Sie tun<br>Außergewöhnliches.<br><i>Niemand weiß es.</i></span>
+      <span class="en">They do<br>extraordinary things.<br><i>Nobody knows.</i></span>
+    </h1>
+    <div class="hfoot">
+      <p class="hsub">
+        <span class="de">Außergewöhnliche Rescue Organisations gibt es weltweit. Nur weiß es kaum jemand. Wir erzählen ihre Geschichten — mit Dokumentarfilm, professionellem Content und einer Website, die bleibt.</span>
+        <span class="en">Extraordinary rescue organisations exist all over the world. Almost nobody knows about them. We tell their stories — through documentary, professional content, and a website that lasts.</span>
+      </p>
+      <div class="scroll-ind" aria-hidden="true">
+        <div class="sbar"></div>
+        <span class="de">Entdecken</span><span class="en">Scroll</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true">
+  <div class="mqi">
+    <span class="de">Rescue Stories</span><span class="sep">·</span>
+    <span>Episode 01 — Kyrenia Animal Rescue</span><span class="sep">·</span>
+    <span>Elaine Powell</span><span class="sep">·</span>
+    <span>Oreo</span><span class="sep">·</span>
+    <span class="de">Zypern 2025</span><span class="en">Cyprus 2025</span><span class="sep">·</span>
+    <span class="de">Dokumentation</span><span class="en">Documentary</span><span class="sep">·</span>
+    <span class="de">Content Library</span><span class="en">Content Library</span><span class="sep">·</span>
+    <span class="de">Jetzt in Produktion</span><span class="en">Now in production</span><span class="sep">·</span>
+    <span class="de">Rescue Stories</span><span class="sep">·</span>
+    <span>Episode 01 — Kyrenia Animal Rescue</span><span class="sep">·</span>
+    <span>Elaine Powell</span><span class="sep">·</span>
+    <span>Oreo</span><span class="sep">·</span>
+    <span class="de">Zypern 2025</span><span class="en">Cyprus 2025</span><span class="sep">·</span>
+    <span class="de">Dokumentation</span><span class="en">Documentary</span><span class="sep">·</span>
+    <span class="de">Content Library</span><span class="en">Content Library</span><span class="sep">·</span>
+    <span class="de">Jetzt in Produktion</span><span class="en">Now in production</span><span class="sep">·</span>
+  </div>
+</div>
+
+<section id="konzept" class="sec t">
+  <div class="inn">
+    <div class="khead r">
+      <span class="tag de">Das Konzept</span><span class="tag en">The concept</span>
+      <h2>
+        <span class="de">Außergewöhnliche Arbeit<br>braucht <i>ein Publikum.</i></span>
+        <span class="en">Extraordinary work<br>needs <i>an audience.</i></span>
+      </h2>
+      <p class="ksub">
+        <span class="de">Rescue Organisations leisten täglich Außergewöhnliches. Und erhalten dafür kaum Unterstützung — nicht weil Menschen nicht helfen wollen, sondern weil sie schlicht nicht wissen, dass diese Organisationen existieren. Das ist kein Schicksal. Das ist ein lösbares Problem.</span>
+        <span class="en">Rescue organisations do extraordinary work every day. And receive far too little support for it — not because people don't want to help, but because they simply don't know these organisations exist. That's not fate. It's a solvable problem.</span>
+      </p>
+    </div>
+  </div>
+  <div class="prob-band r">
+    <div class="inn">
+      <span class="prob-band-label de">Das Grundproblem</span>
+      <span class="prob-band-label en">The core problem</span>
+      <div class="prob-grid">
+        <div class="prob-item">
+          <p class="prob-item-head"><span class="de">Keine Sichtbarkeit</span><span class="en">No visibility</span></p>
+          <p class="prob-item-text"><span class="de">Rescue Organisations haben kein Marketing-Budget und kein Team dafür. Also passiert — nichts. Potenzielle Unterstützer, Adoptanten und Spender wissen nicht, dass es sie gibt. Nicht weil die Arbeit fehlt, sondern weil niemand davon erzählt.</span><span class="en">Rescue organisations have no marketing budget and no team for it. So nothing happens. Potential supporters, adopters, and donors don't know they exist — not because the work isn't there, but because nobody's telling the story.</span></p>
+        </div>
+        <div class="prob-item">
+          <p class="prob-item-head"><span class="de">Kein Content, kein Kanal</span><span class="en">No content, no channel</span></p>
+          <p class="prob-item-text"><span class="de">Social Media ist heute der schnellste Weg, um Menschen zu erreichen und zu bewegen. Aber professionellen Content zu erstellen kostet Zeit, Geld und Know-how — alles Dinge, die Rescue Organisations nicht haben. Also bleibt der Kanal stumm. Und mit ihm die Geschichte, die eigentlich erzählt werden müsste.</span><span class="en">Social media is the fastest way to reach and move people today. But creating professional content takes time, money, and expertise — things rescue organisations simply don't have. So the channel stays silent. And with it: the story that deserves to be told.</span></p>
+        </div>
+        <div class="prob-item">
+          <p class="prob-item-head"><span class="de">Kein digitales Fundament</span><span class="en">No digital foundation</span></p>
+          <p class="prob-item-text"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
+        </div>
+      </div>
+      <div class="trust-qs r">
+        <p class="trust-intro">
+          <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
+          <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+        </p>
+        <div class="trust-q-list">
+          <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
+          <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
+          <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
+        </div>
+      </div>
+      <p class="prob-bridge">
+        <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
+        <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
+      </p>
+    </div>
+  </div>
+  <div class="inn">
+    <div class="strips">
+      <div class="strip r d1">
+        <span class="snum">01</span>
+        <div>
+          <div class="stitle"><span class="de">Die Dokumentation</span><span class="en">The documentary</span></div>
+          <p class="ssub"><span class="de">Wir kommen, wir drehen, wir erzählen eure Geschichte.</span><span class="en">We come, we film, we tell your story.</span></p>
+        </div>
+        <p class="sdesc"><span class="de">Eine Woche lang sind wir wirklich dabei — nicht als Kamerateam, das seine Liste abarbeitet, sondern als Menschen, die verstehen wollen. Wir begleiten den Alltag im Shelter, lernen die Tiere kennen, hören den Menschen zu. Und irgendwo dazwischen entstehen die Momente, die man nicht planen kann — die echten. Das Ergebnis ist ein professionell produzierter Dokumentarfilm auf YouTube. Kein Spendenaufruf. Keine Werbung. Eine Geschichte, die bewegt — weil sie wahr ist.</span><span class="en">For a week, we're truly there — not as a camera crew working through a shot list, but as people who genuinely want to understand. We follow the shelter's everyday life, get to know the animals, listen to the people behind it all. And somewhere in between, the moments emerge that can't be planned — the real ones. The result: a professionally produced documentary on YouTube. Not a fundraiser video. Not an ad. A story that moves people — because it's true.</span></p>
+      </div>
+      <div class="strip r d2">
+        <span class="snum">02</span>
+        <div>
+          <div class="stitle"><span class="de">Social Media &amp; Content</span><span class="en">Social Media &amp; Content</span></div>
+          <p class="ssub"><span class="de">Was bleibt, wenn wir wieder weg sind.</span><span class="en">What stays long after we leave.</span></p>
+        </div>
+        <p class="sdesc"><span class="de">Nebenbei — aber alles andere als nebensächlich. Während der Dokumentarfilm entsteht, sammeln wir gleichzeitig Material, das einer Organisation Monate lang trägt: kurze Clips, Reels, Fotos — fertig für Instagram, Facebook und TikTok. Wir erarbeiten gemeinsam eine Strategie: Wer ist die Zielgruppe? Was wird gepostet, wann und warum? Wie baut man eine echte Community auf? Am Ende wissen sie nicht nur, wie es geht — sie haben es selbst erlebt. Für Organisationen, die es möchten, übernehmen wir danach auch die laufende Kanalbetreuung.</span><span class="en">As a side effect — but anything but secondary. While the documentary takes shape, we gather material that keeps giving for months: short clips, reels, photos — ready for Instagram, Facebook, and TikTok. Together we build a strategy: who is the audience, what gets posted, when and why, and how to grow a real community. By the end, they don't just know how it works — they've lived it. For organisations that want it, we can also take over ongoing channel management.</span></p>
+      </div>
+      <div class="strip r d3">
+        <span class="snum">03</span>
+        <div>
+          <div class="stitle"><span class="de">Die neue Website</span><span class="en">The new website</span></div>
+          <p class="ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
+        </div>
+        <div>
+          <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
+          <div class="donate-viz">
+            <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
+            <div class="tank-row">
+              <div class="tank-item">
+                <canvas class="tank-canvas" id="tank-canvas"></canvas>
+                <span class="tank-lbl"><span class="de">Wasser · 65 %</span><span class="en">Water · 65 %</span></span>
+              </div>
+              <div class="tank-item">
+                <canvas class="tank-canvas" id="food-canvas"></canvas>
+                <span class="tank-lbl"><span class="de">Futter · 40 %</span><span class="en">Food · 40 %</span></span>
+              </div>
+            </div>
+            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wb-block r">
+      <span class="tag de">Was bleibt</span><span class="tag en">What remains</span>
+      <h2 style="margin-bottom:.75rem">
+        <span class="de">Was nach unserem Besuch <i>wirklich bleibt.</i></span>
+        <span class="en">What truly <i>remains after our visit.</i></span>
+      </h2>
+      <p class="wb-lead">
+        <span class="de">Wenn wir abreisen, verlassen wir keine leere Bühne. Wir hinterlassen eine Organisation, die digital besser aufgestellt ist als je zuvor.</span>
+        <span class="en">When we leave, we don't leave an empty stage. We leave behind an organisation that is more digitally equipped than ever before.</span>
+      </p>
+      <ul class="wb-list">
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Eine professionelle Website, die Vertrauen schafft und Spenden generiert</span><span class="en">A professional website that builds trust and generates donations</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Hochwertiger Social-Media-Content für Wochen oder Monate im Voraus</span><span class="en">High-quality social media content for weeks or months ahead</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Zusätzliche Reichweite durch die veröffentlichte Dokumentation auf YouTube</span><span class="en">Reach through the published documentary on YouTube</span></span>
+        </li>
+        <li class="wb-item">
+          <span class="wb-plus">+</span>
+          <span class="wb-text"><span class="de">Direkte finanzielle Unterstützung durch das Sponsoring</span><span class="en">Direct financial support through sponsorship</span></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="episode" class="ep">
+  <div class="ep-wm" aria-hidden="true">EP. 01</div>
+  <div class="ep-in">
+    <div class="r">
+      <span class="tag">Episode 01</span>
+      <h2>
+        <span class="de">Kyrenia Animal Rescue,<br>Zypern.</span>
+        <span class="en">Kyrenia Animal Rescue,<br>Cyprus.</span>
+      </h2>
+    </div>
+    <div class="ep-grid">
+      <div class="ep-text r d1">
+        <p class="intro">
+          <span class="de">Es war Elaine Powell, die mir half, Oreo von den Straßen Zyperns zu retten. Ohne mich zu kennen. Ohne etwas dafür zu erwarten. Weil das einfach ist, wer sie ist.</span>
+          <span class="en">It was Elaine Powell who helped me rescue Oreo from the streets of Cyprus. Without knowing me. Without expecting anything in return. Because that is simply who she is.</span>
+        </p>
+        <div class="body">
+          <div class="de">
+            <p>Als ich sie persönlich traf, sah ich, was das wirklich bedeutet: Elaine als Centre Managerin, sechs freiwillige Helfer — und über zweihundert Hunde, kaum Budget. Bei bis zu 45 Grad kann selbst Trinkwasser für die Tiere zur Krise werden.</p>
+            <p>Was Elaine leistet, verdient mehr als Bewunderung. Es verdient ein Publikum. Sie ist Episode 01 — und der Grund, warum es Rescue Stories gibt.</p>
+          </div>
+          <div class="en">
+            <p>When I visited in person, I saw what that really means: Elaine as Centre Manager, six volunteers — and over two hundred dogs, barely any budget. At temperatures reaching 45°C, even drinking water can become a crisis.</p>
+            <p>What Elaine does deserves more than admiration. It deserves an audience. She is Episode 01 — and the reason Rescue Stories exists.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ep-right r d2">
+        <div class="ep-img">
+          <img src="{shelter_src}" alt="Kyrenia Animal Rescue shelter">
+          <div class="ep-img-cap"><span class="de">Kyrenia Animal Rescue, Nordzypern</span><span class="en">Kyrenia Animal Rescue, North Cyprus</span></div>
+        </div>
+        <div class="ep-meta">
+          <div class="ep-meta-row">
+            <span class="em-key"><span class="de">Centre Managerin</span><span class="en">Centre Manager</span></span>
+            <span class="em-val">Elaine Powell</span>
+          </div>
+          <div class="ep-meta-row">
+            <span class="em-key"><span class="de">Standort</span><span class="en">Location</span></span>
+            <span class="em-val"><span class="de">Kyrenia, Nordzypern</span><span class="en">Kyrenia, North Cyprus</span></span>
+          </div>
+          <div class="ep-meta-row">
+            <span class="em-key">Status</span>
+            <span class="em-val" style="color:var(--a)"><span class="de">In Vorbereitung</span><span class="en">In production</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats r d2">
+      <div class="sbox"><span class="sn">200+</span><span class="sl"><span class="de">Hunde im Shelter</span><span class="en">Dogs in the shelter</span></span></div>
+      <div class="sbox"><span class="sn">7</span><span class="sl"><span class="de">Menschen im Einsatz</span><span class="en">People on the ground</span></span></div>
+      <div class="sbox"><span class="sn">45°C</span><span class="sl"><span class="de">Hitze im Sommer</span><span class="en">Summer heat extremes</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sp r">
+  <div class="sp-inn">
+    <div class="sp-head">
+      <div>
+        <span class="tag de">Pilot-Sponsor</span>
+        <span class="tag en">Pilot sponsor</span>
+        <h2 style="margin-top:.5rem">
+          <span class="de">Ohne Bullsland Dogwear<br><i>wäre Episode 01 nicht möglich.</i></span>
+          <span class="en">Without Bullsland Dogwear,<br><i>Episode 01 wouldn't happen.</i></span>
+        </h2>
+        <p class="ksub" style="margin-top:1.25rem">
+          <span class="de">Bullsland Dogwear ist eine deutsche Premium-Hundemarke — mit über 50.000 Kunden und einer 4,9-Sterne-Bewertung. Als Pilot-Sponsor machen sie Episode 01 möglich: mit konkreter Unterstützung statt leerer Versprechen.</span>
+          <span class="en">Bullsland Dogwear is a German premium dog brand — with over 50,000 customers and a 4.9-star rating. As pilot sponsor, they make Episode 01 possible: with concrete support, not empty promises.</span>
+        </p>
+        <a href="https://www.bullsland.de/" target="_blank" rel="noopener" class="btn acc" style="margin-top:1.5rem">
+          <span class="de">Shop besuchen</span><span class="en">Visit shop</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+      <div class="sp-logo-wrap">
+        <a href="https://www.bullsland.de/" target="_blank" rel="noopener" aria-label="Bullsland Dogwear Website">
+          {f'<img class="sp-logo" src="{logo_src}" alt="Bullsland Dogwear">' if logo_src else '<span class="sp-logo-text">Bullsland<br>Dogwear</span>'}
+        </a>
+      </div>
+    </div>
+    <div class="sp-contrib">
+      <div class="sp-item">
+        <span class="sp-item-num"><span class="de">Beitrag 01</span><span class="en">Contribution 01</span></span>
+        <p class="sp-item-title"><span class="de">Flüge &amp; Unterkunft</span><span class="en">Flights &amp; accommodation</span></p>
+        <p class="sp-item-desc"><span class="de">Bullsland übernimmt die Reisekosten für unser Team — Flüge und Unterkunft vor Ort. So entstehen für die Rescue Organisation keine Kosten durch uns.</span><span class="en">Bullsland covers the travel costs for our team — flights and accommodation on site. This means the rescue organisation incurs no costs through us.</span></p>
+      </div>
+      <div class="sp-item">
+        <span class="sp-item-num"><span class="de">Beitrag 02</span><span class="en">Contribution 02</span></span>
+        <p class="sp-item-title"><span class="de">Hundezubehör für die Rescue</span><span class="en">Dog accessories for the rescue</span></p>
+        <p class="sp-item-desc"><span class="de">Zusätzlich stellt Bullsland Dogwear Hundezubehör zur Verfügung, das direkt an die Kyrenia Animal Rescue geht — ein konkreter Beitrag für die Tiere vor Ort.</span><span class="en">In addition, Bullsland Dogwear provides dog accessories that go directly to Kyrenia Animal Rescue — a tangible contribution for the animals on site.</span></p>
+      </div>
+      <div class="sp-item">
+        <span class="sp-item-num"><span class="de">Beitrag 03</span><span class="en">Contribution 03</span></span>
+        <p class="sp-item-title"><span class="de">Was darüber hinausgeht, gehört der Rescue</span><span class="en">Anything beyond that goes to the rescue</span></p>
+        <p class="sp-item-desc"><span class="de">Was über die Reisekosten hinausgeht, fließt vollständig an die Rescue Organisation — ohne Abzug, ohne Ausnahme.</span><span class="en">Anything beyond the travel costs goes entirely to the rescue organisation — no deductions, no exceptions.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="geschichte" class="sec">
+  <div class="inn">
+    <div class="g-intro r">
+      <span class="tag de">Wie alles begann</span>
+      <span class="tag en">Where it all began</span>
+      <h2>
+        <span class="de">Ein Hund auf Zypern <i>veränderte alles.</i></span>
+        <span class="en">A dog in Cyprus <i>changed everything.</i></span>
+      </h2>
+      <p class="g-lead">
+        <span class="de">Vier Monate, die mein Leben veränderten — und den Grundstein für dieses Projekt legten.</span>
+        <span class="en">Four months that changed my life — and laid the foundation for this project.</span>
+      </p>
+    </div>
+    <div class="filmstrip">
+      <div class="moment r d1">
+        <img class="moment-img" src="{night_src}" alt="Oreo at night in Cyprus">
+        <div class="moment-cap">
+          <span class="moment-num">Moment 01</span>
+          <p class="moment-text"><span class="de">Er folgte mir tagelang durch die Straßen Zyperns.</span><span class="en">He followed me for days through the streets of Cyprus.</span></p>
+        </div>
+      </div>
+      <div class="moment r d2">
+        <img class="moment-img" src="{door_src}" alt="Oreo sleeping at apartment door">
+        <div class="moment-cap">
+          <span class="moment-num">Moment 02</span>
+          <p class="moment-text"><span class="de">Eines Morgens schlief er vor meiner Tür. Da wusste ich es.</span><span class="en">One morning he slept at my door. That's when I knew.</span></p>
+        </div>
+      </div>
+      <div class="moment r d3">
+        <img class="moment-img" src="{airport_src}" alt="Airport pickup with Oreo">
+        <div class="moment-cap">
+          <span class="moment-num">Moment 03</span>
+          <p class="moment-text"><span class="de">Vier Monate später hielt ich seine Papiere in der Hand.</span><span class="en">Four months later, I was holding his documents.</span></p>
+        </div>
+      </div>
+      <div class="moment r d3">
+        <img class="moment-img" src="{couch_src}" alt="Oreo at home">
+        <div class="moment-cap">
+          <span class="moment-num de">Heute</span><span class="moment-num en">Today</span>
+          <p class="moment-text"><span class="de">Oreo ist angekommen. Und dieses Projekt hat begonnen.</span><span class="en">Oreo has arrived. And this project has begun.</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="g-text r">
+      <div class="g-body">
+        <div class="de">
+          <p>Was mir bei all dem klar wurde: Elaine Powell und die Kyrenia Animal Rescue hatten mir geholfen, ohne mich zu kennen. Aber was mich wirklich traf, war das, was ich bei meinem persönlichen Besuch sah — Elaine als Centre Managerin, sechs Helfer, über zweihundert Hunde.</p>
+          <p>Diese Rescue Organisations tun außergewöhnliche Dinge — und kaum jemand weiß es. Kein Marketing, keine Website, keine Reichweite. Genau das wollen wir ändern.</p>
+        </div>
+        <div class="en">
+          <p>What became clear through all of this: Elaine Powell and Kyrenia Animal Rescue had helped me without knowing me at all. But what really struck me was what I saw when I visited in person — Elaine as Centre Manager, six volunteers, over two hundred dogs.</p>
+          <p>These rescue organisations do extraordinary things — and almost nobody knows it. No marketing, no website, no reach. That is exactly what we want to change.</p>
+        </div>
+      </div>
+      <blockquote class="qblock">
+        <span class="de">„Ich wollte das Problem nicht mit einer Spende lösen. Ich wollte es bei der Wurzel packen — und das ist Marketing."</span>
+        <span class="en">"I didn't want to solve this with a donation. I wanted to tackle it at the root — and that root is marketing."</span>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="vid-sec">
+  <div class="vid-inner">
+    <div class="vid-text r">
+      <span class="tag de">Die Abholung</span>
+      <span class="tag en">The pickup</span>
+      <h2>
+        <span class="de">Zwei Minuten, die <i>alles sagen.</i></span>
+        <span class="en">Two minutes that <i>say it all.</i></span>
+      </h2>
+      <p>
+        <span class="de">Zwei Minuten, die zeigen, worum es geht: echte Geschichten, echte Emotionen — und was passiert, wenn man einfach hinfährt und anfängt zu filmen.</span>
+        <span class="en">Two minutes that show what this is about: real stories, real emotions — and what happens when you simply go there and start filming.</span>
+      </p>
+    </div>
+    <div class="vid-player r d2">
+      <video controls playsinline preload="metadata" style="width:100%;max-width:340px;aspect-ratio:9/16;display:block;background:#111">
+        <source src="{video_src}" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section id="mitmachen" class="sec t">
+  <div class="inn">
+    <div class="mm-head r">
+      <span class="tag de">Mitmachen</span><span class="tag en">Get involved</span>
+      <h2><span class="de">Mach dieses <i>Projekt möglich.</i></span><span class="en">Help make <i>this happen.</i></span></h2>
+      <p class="mm-sub"><span class="de">Ob als Sponsor, als Teil des Teams oder einfach durch deine Reichweite — du kannst einen echten Unterschied machen.</span><span class="en">Whether as a sponsor, as part of the team, or simply through your reach — you can make a real difference.</span></p>
+    </div>
+    <div class="cards">
+      <div class="card feat r">
+        <span class="card-tag"><span class="de">Für Unternehmen</span><span class="en">For companies</span></span>
+        <h3><span class="de">Sponsor werden</span><span class="en">Become a sponsor</span></h3>
+        <p><span class="de">Sie wollen nicht nur Sichtbarkeit kaufen, sondern tatsächlich etwas bewegen — in einem Format, das Menschen wirklich erreicht? Dann sollten wir reden.</span><span class="en">You don't want to just buy visibility — you want to create real impact in a format that actually reaches people? Then let's talk.</span></p>
+        <a class="btn inv" href="mailto:hello@rescuestories.com"><span class="de">Jetzt anfragen</span><span class="en">Get in touch</span></a>
+      </div>
+      <div class="card r d1">
+        <span class="card-tag"><span class="de">Für Helfer</span><span class="en">For helpers</span></span>
+        <h3><span class="de">Als Volunteer dabei sein</span><span class="en">Join as a volunteer</span></h3>
+        <p><span class="de">Du bringst Skills in Video, Social Media oder Produktion mit — und willst sie für etwas einsetzen, das wirklich zählt? Meld dich.</span><span class="en">You have skills in video, social media, or production — and want to put them towards something that actually matters? Get in touch.</span></p>
+        <a class="btn acc" href="mailto:join@rescuestories.com"><span class="de">Jetzt melden</span><span class="en">Get in touch</span></a>
+      </div>
+      <div class="card r d2">
+        <span class="card-tag"><span class="de">Für alle</span><span class="en">For everyone</span></span>
+        <h3><span class="de">Auf dem Laufenden bleiben</span><span class="en">Stay in the loop</span></h3>
+        <p><span class="de">Folge dem Projekt auf Social Media. Wenn Episode 01 erscheint, ist jede Weitergabe ein direkter Beitrag für Kyrenia Animal Rescue.</span><span class="en">Follow the project on social media. When Episode 01 drops, every share is a direct contribution to Kyrenia Animal Rescue.</span></p>
+        <a class="btn" href="#"><span class="de">Folgen</span><span class="en">Follow us</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-sec r">
+  <div class="inn">
+    <blockquote class="main-quote">
+      <span class="de">Wir retten nicht selbst jedes Tier. Wir stärken diejenigen, die es jeden Tag versuchen.</span>
+      <span class="en">We don't rescue every animal ourselves. We strengthen those who try every day.</span>
+    </blockquote>
+    <span class="quote-attr">Rescue Stories</span>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Rescue Stories</span>
+  <span><a href="mailto:hello@rescuestories.com">hello@rescuestories.com</a> · <a href="#"><span class="de">Impressum</span><span class="en">Legal notice</span></a></span>
+</footer>
+
+<script>{JS}</script>'''
+
+import os, mimetypes
+def b64_any(path):
+    mime = mimetypes.guess_type(path)[0] or 'image/png'
+    with open(path, 'rb') as f:
+        return f'data:{mime};base64,' + base64.b64encode(f.read()).decode()
+
+LOGO_PATH = f'{WEB}/../Bullsland-Dogwear-Logo.png'
+LOGO = b64_any(LOGO_PATH) if os.path.exists(LOGO_PATH) else None
+if LOGO:
+    print('Logo found and embedded.')
+else:
+    print('Logo not found — using text fallback. Drop bullsland-logo.png into the assets/ folder to embed it.')
+
+# Artifact version: base64 images, relative video path (won't play in artifact but works locally)
+artifact_html = make_html(HERO, NIGHT, DOOR, AIRPORT, COUCH, SHELTER, 'assets/Oreo abholung.mp4', LOGO)
+with open(OUT, 'w', encoding='utf-8') as f:
+    f.write(artifact_html)
+print(f'Artifact: {len(artifact_html):,} chars ({len(artifact_html.encode())//1024}KB)')
+
+# Local version: relative paths everywhere
+local_html = f'''<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+''' + make_html(
+    'assets/web/hero.jpg',
+    'assets/web/oreo_night.jpg',
+    'assets/web/oreo_door.jpg',
+    'assets/web/airport.jpg',
+    'assets/web/couch.jpg',
+    'assets/web/shelter.jpg',
+    'assets/web/oreo-abholung-web.mp4',
+    'assets/Bullsland-Dogwear-Logo.png' if os.path.exists(LOGO_PATH) else None
+) + '''
+</html>'''
+with open(LOCAL, 'w', encoding='utf-8') as f:
+    f.write(local_html)
+print(f'Local index.html written')
