@@ -775,7 +775,9 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   function frame(){
     ctx.clearRect(0,0,W,H);
     fill+=(TARGET-fill)*0.010;
-    var show=Math.floor(allK.length*(fill/TARGET));
+    // Reveal bones whose resting position is below the fill line — same geometry as water
+    var fillLine=CY+R*(1-fill*2);
+    var show=0;for(var i=0;i<allK.length;i++){if(allK[i].fy>=fillLine)show++;else break;}
     while(active.length<show&&active.length<allK.length) spawnK(allK[active.length]);
     // Outer ambient glow
     var od=ctx.createRadialGradient(CX,CY,R-14,CX,CY,R+22);od.addColorStop(0,'rgba(255,255,255,0)');od.addColorStop(0.55,'rgba(255,255,255,0.022)');od.addColorStop(1,'rgba(255,255,255,0)');
