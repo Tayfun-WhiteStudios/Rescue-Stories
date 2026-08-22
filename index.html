@@ -735,21 +735,41 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   var W=240,H=240,CX=120,CY=120,R=100;
   cv.width=W; cv.height=H;
   var TARGET=0.40,fill=0,t=0,started=false;
-  function easeOutBounce(x){var n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d){x-=1.5/d;return n*x*x+0.75;}if(x<2.5/d){x-=2.25/d;return n*x*x+0.9375;}x-=2.625/d;return n*x*x+0.984375;}
-  var KR=6,vSp=KR*1.88,hSp=KR*2.18,allK=[];
-  for(var row=0;row<20;row++){var baseY=CY+R-KR-4-row*vSp;var xOff=(row%2)*hSp*0.5;for(var col=-7;col<=7;col++){var kx=CX+col*hSp+xOff+(Math.random()-0.5)*2.5;var ky=baseY+(Math.random()-0.5)*2.5;var dist=Math.sqrt((kx-CX)*(kx-CX)+(ky-CY)*(ky-CY));if(dist+KR<R-5){allK.push({fx:kx,fy:ky,r:KR-1.5+Math.random()*2.8,rot:(Math.random()-0.5)*0.5,sh:Math.random()});}}}
+  // Smooth ease-out-quart — elegant deceleration, no bounce
+  function easeOutQuart(x){return 1-Math.pow(1-x,4);}
+  // Bone grid — larger treats, natural rotation variance, organic scatter
+  var L=10,er=5.8,ov=3.6,sw=3.8; // bone geometry constants
+  var vSp=17,hSp=36,allK=[];
+  for(var row=0;row<12;row++){var baseY=CY+R-8-row*vSp;var xOff=(row%2)*hSp*0.5;for(var col=-3;col<=3;col++){var kx=CX+col*hSp+xOff+(Math.random()-0.5)*5;var ky=baseY+(Math.random()-0.5)*4;var dist=Math.sqrt((kx-CX)*(kx-CX)+(ky-CY)*(ky-CY));if(dist+16<R-4){allK.push({fx:kx,fy:ky,rot:(Math.random()-0.5)*1.1,sh:Math.random()});}}}
   allK.sort(function(a,b){return b.fy-a.fy;});
   var active=[];
-  function spawnK(tmpl){active.push({x:tmpl.fx,fy:tmpl.fy,cy:tmpl.fy-115,r:tmpl.r,rot:tmpl.rot,sh:tmpl.sh,p:0});}
-  function drawK(k){
+  function spawnK(tmpl){active.push({x:tmpl.fx,fy:tmpl.fy,cy:tmpl.fy-120,rot:tmpl.rot,sh:tmpl.sh,p:0});}
+  function drawBone(k){
     ctx.save();ctx.translate(k.x,k.cy);ctx.rotate(k.rot);
-    ctx.beginPath();ctx.ellipse(0,k.r*0.52,k.r*0.72,k.r*0.20,0,0,Math.PI*2);ctx.fillStyle='rgba(0,0,0,0.32)';ctx.fill();
-    var s=k.sh;var g=ctx.createRadialGradient(-k.r*0.22,-k.r*0.26,0,0,0,k.r*1.05);
-    g.addColorStop(0,'rgb('+(230+Math.round(s*15))+','+(138+Math.round(s*20))+','+(22+Math.round(s*18))+')');
-    g.addColorStop(0.52,'rgb('+(182+Math.round(s*14))+','+(96+Math.round(s*16))+','+(15+Math.round(s*12))+')');
-    g.addColorStop(1,'rgb('+(105+Math.round(s*18))+','+(58+Math.round(s*12))+','+(8+Math.round(s*8))+')');
-    ctx.beginPath();ctx.ellipse(0,0,k.r,k.r*0.63,0,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-    ctx.beginPath();ctx.ellipse(-k.r*0.26,-k.r*0.28,k.r*0.20,k.r*0.12,-0.4,0,Math.PI*2);ctx.fillStyle='rgba(255,240,205,0.40)';ctx.fill();
+    var s=k.sh;
+    // Warm caramel — diagonal linear gradient, upper-left bright → lower-right dark
+    var g=ctx.createLinearGradient(-L-er,-ov-er,L+er,ov+er);
+    g.addColorStop(0,'rgb('+(232+Math.round(s*8))+','+(148+Math.round(s*14))+','+(42+Math.round(s*10))+')');
+    g.addColorStop(0.44,'rgb('+(188+Math.round(s*10))+','+(100+Math.round(s*14))+','+(22+Math.round(s*8))+')');
+    g.addColorStop(1,'rgb('+(108+Math.round(s*12))+','+(55+Math.round(s*10))+','+(10+Math.round(s*6))+')');
+    // Soft ambient shadow (painted ellipse — no canvas shadow blur needed)
+    ctx.fillStyle='rgba(0,0,0,0.36)';
+    ctx.beginPath();ctx.ellipse(0.5,2.8,L+er*0.8,ov+er*0.55,0,0,Math.PI*2);ctx.fill();
+    // Bone body
+    ctx.fillStyle=g;
+    ctx.beginPath();ctx.rect(-L,-sw,L*2,sw*2);ctx.fill();
+    ctx.beginPath();ctx.arc(-L,-ov,er,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(-L, ov,er,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc( L,-ov,er,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc( L, ov,er,0,Math.PI*2);ctx.fill();
+    // Broad soft specular on each knob top — the material catch-light
+    ctx.fillStyle='rgba(255,245,215,0.45)';
+    ctx.beginPath();ctx.ellipse(-L-er*0.14,-ov-er*0.18,er*0.46,er*0.28,-0.28,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse( L-er*0.14,-ov-er*0.18,er*0.46,er*0.28,-0.28,0,Math.PI*2);ctx.fill();
+    // Crisp micro-specular dot — makes it look lacquered, ceramic
+    ctx.fillStyle='rgba(255,255,248,0.84)';
+    ctx.beginPath();ctx.arc(-L-er*0.26,-ov-er*0.30,er*0.12,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc( L-er*0.26,-ov-er*0.30,er*0.12,0,Math.PI*2);ctx.fill();
     ctx.restore();
   }
   function frame(){
@@ -757,15 +777,28 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
     fill+=(TARGET-fill)*0.010;
     var show=Math.floor(allK.length*(fill/TARGET));
     while(active.length<show&&active.length<allK.length) spawnK(allK[active.length]);
+    // Outer ambient glow
     var od=ctx.createRadialGradient(CX,CY,R-14,CX,CY,R+22);od.addColorStop(0,'rgba(255,255,255,0)');od.addColorStop(0.55,'rgba(255,255,255,0.022)');od.addColorStop(1,'rgba(255,255,255,0)');
     ctx.beginPath();ctx.arc(CX,CY,R+22,0,Math.PI*2);ctx.fillStyle=od;ctx.fill();
     ctx.save();ctx.beginPath();ctx.arc(CX,CY,R-1,0,Math.PI*2);ctx.clip();
+    // Deep interior
     var bg=ctx.createRadialGradient(CX,CY-R*0.3,4,CX,CY,R*1.1);bg.addColorStop(0,'#0e1928');bg.addColorStop(0.6,'#090f1e');bg.addColorStop(1,'#040810');
     ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    active.forEach(function(k){k.p=Math.min(1,k.p+0.055);k.cy=k.fy-115*(1-easeOutBounce(k.p));drawK(k);});
-    if(active.length>0){var pt=Math.min.apply(null,active.map(function(k){return k.cy-k.r;}));var wg=ctx.createLinearGradient(0,pt-8,0,pt+20);wg.addColorStop(0,'rgba(220,130,30,0)');wg.addColorStop(0.45,'rgba(220,130,30,0.07)');wg.addColorStop(1,'rgba(220,130,30,0)');ctx.fillStyle=wg;ctx.fillRect(CX-R,pt-10,R*2,32);}
-    var gl=ctx.createRadialGradient(CX-R+8,CY-12,0,CX-R+6,CY,R*0.38);gl.addColorStop(0,'rgba(255,255,255,0.07)');gl.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
+    // Animate bones — smooth ease-out fall, slower & more deliberate
+    active.forEach(function(k){k.p=Math.min(1,k.p+0.026);k.cy=k.fy-120*(1-easeOutQuart(k.p));drawBone(k);});
+    // Warm pile-surface glow — the signature Apple touch: one slowly breathing light
+    if(active.length>4){
+      var pt=Math.min.apply(null,active.slice(0,active.length).map(function(k){return k.cy-(ov+er);}));
+      var glowX=CX+Math.sin(t*0.11)*R*0.3;
+      var pg=ctx.createRadialGradient(glowX,pt+4,0,glowX,pt+4,R*0.62);
+      pg.addColorStop(0,'rgba(210,120,22,0.12)');pg.addColorStop(0.5,'rgba(200,105,18,0.05)');pg.addColorStop(1,'rgba(180,80,10,0)');
+      ctx.fillStyle=pg;ctx.fillRect(CX-R,pt-8,R*2,38);
+    }
+    // Glass wall reflection
+    var gl=ctx.createRadialGradient(CX-R+8,CY-12,0,CX-R+6,CY,R*0.38);gl.addColorStop(0,'rgba(255,255,255,0.07)');gl.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
     ctx.restore();
+    // Ring — identical to water version
     ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=6;ctx.stroke();
     ctx.beginPath();ctx.arc(CX,CY,R-3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;ctx.stroke();
     ctx.beginPath();ctx.arc(CX,CY,R+3,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.03)';ctx.lineWidth=1;ctx.stroke();
@@ -778,6 +811,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
     ctx.beginPath();ctx.arc(ex,ey,7,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
     ctx.beginPath();ctx.arc(ex,ey,2.8,0,Math.PI*2);ctx.fillStyle='rgba(255,215,175,0.96)';ctx.fill();
     ctx.restore();
+    // Top rim gleam
     ctx.beginPath();ctx.arc(CX,CY,R,-Math.PI*0.78,-Math.PI*0.22);
     var tg=ctx.createLinearGradient(CX-R*0.65,CY-R,CX+R*0.65,CY-R);tg.addColorStop(0,'rgba(255,255,255,0)');tg.addColorStop(0.4,'rgba(255,255,255,0.12)');tg.addColorStop(0.6,'rgba(255,255,255,0.05)');tg.addColorStop(1,'rgba(255,255,255,0)');
     ctx.strokeStyle=tg;ctx.lineWidth=2.5;ctx.stroke();
