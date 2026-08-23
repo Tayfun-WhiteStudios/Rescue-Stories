@@ -632,21 +632,21 @@ footer a:hover{color:var(--a)}
       <span class="tag de">Die Abholung</span>
       <span class="tag en">The pickup</span>
       <h2>
-        <span class="de">Der Tag, an dem <i>Oreo gefunden wurde.</i></span>
-        <span class="en">The day <i>Oreo was found.</i></span>
+        <span class="de">Das ist Oreo — <i>hier hat alles begonnen.</i></span>
+        <span class="en">This is Oreo — <i>this is where it all started.</i></span>
       </h2>
       <p>
-        <span class="de">Dieses Video zeigt den Moment, in dem Oreo zum ersten Mal aus der Straße gerettet wurde — roh, ungeplant, echt. Gepostet auf Instagram, wurde es zu einem der meistgesehenen Beiträge auf unserem Kanal. Nicht weil es perfekt produziert war. Sondern weil echte Geschichten echte Menschen berühren.</span>
-        <span class="en">This video captures the moment Oreo was rescued from the street — raw, unplanned, real. Posted to Instagram, it became one of the most-watched posts on our channel. Not because it was perfectly produced. But because real stories move real people.</span>
+        <span class="de">Ein Straßenhund. Gefunden, gerettet, gefilmt. Spontan gepostet — und über 100.000 Menschen haben zugeschaut.<br><br>Jede Rescue-Organisation hat hunderte solcher Geschichten. Geschichten, die Menschen bewegen, die Spenden auslösen, die Adoptionen anstoßen. Sie müssen nur richtig erzählt werden — und die Menschen interessieren sich dafür.<br><br>Wir wissen wie.</span>
+        <span class="en">A street dog. Found, rescued, filmed. Posted without a plan — and over 100,000 people watched.<br><br>Every rescue organisation has hundreds of stories like this. Stories that move people, trigger donations, start adoptions. They just need to be told the right way — and people genuinely care.<br><br>We know how.</span>
       </p>
       <div class="vid-stats">
         <div class="vid-stat r d1">
-          <span class="vid-stat-num">100K+</span>
+          <span class="vid-stat-num" data-count="100" data-suffix="K+">100K+</span>
           <span class="vid-stat-lbl">Views</span>
         </div>
         <div class="vid-stat r d2">
-          <span class="vid-stat-num">6.000+</span>
-          <span class="vid-stat-lbl"><span class="de">Likes</span><span class="en">Likes</span></span>
+          <span class="vid-stat-num" data-count="7000" data-suffix="+" data-format="de">7.000+</span>
+          <span class="vid-stat-lbl">Likes</span>
         </div>
         <div class="vid-stat r d3">
           <span class="vid-stat-num de">Organisch</span>
@@ -912,6 +912,31 @@ function switchTab(i){
   tabs.forEach(function(t,idx){t.classList.toggle('active',idx===i);});
   panels.forEach(function(p,idx){p.classList.toggle('active',idx===i);});
 }
+
+// Stat counter scroll animation
+(function(){
+  function fmt(n,f){return f==='de'?n.toLocaleString('de-DE'):String(n);}
+  var cio=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el=e.target;
+      var target=parseInt(el.dataset.count);
+      var suffix=el.dataset.suffix||'';
+      var format=el.dataset.format||'';
+      var dur=1600,st=null;
+      function tick(ts){
+        if(!st) st=ts;
+        var p=Math.min((ts-st)/dur,1);
+        var ease=1-Math.pow(1-p,3);
+        el.textContent=fmt(Math.round(ease*target),format)+suffix;
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  },{threshold:0.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+})();
 
 // Parallax on #konzept heading
 (function(){
