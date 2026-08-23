@@ -64,25 +64,42 @@ h2 i{font-style:normal;color:var(--a)}
 .vid-player video{width:100%;max-width:340px;aspect-ratio:9/16;display:block;object-fit:cover;background:#1a1a1a}
 .khead{max-width:760px;margin-bottom:3.5rem}
 .ksub{font-size:1.1rem;color:var(--mid);line-height:1.72;max-width:58ch;margin-top:1.2rem}
-.prob-band{background:#0D0D0C;padding:4rem;margin-bottom:0}
-.prob-band-label{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:2.5rem;display:block}
-.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
-.prob-item-head{font-size:1.18rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:#F9F8F6;margin-bottom:.65rem}
-.prob-item-text{font-size:.9rem;color:rgba(249,248,246,.42);line-height:1.75}
-.trust-qs{margin:2.5rem 0;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.04)}
+/* ── Problem section: sticky scroll ── */
+.prob-section{background:#0D0D0C;padding:6rem 2rem;margin-top:3.5rem}
+.prob-sticky-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:5rem;align-items:start}
+.prob-sticky-col{position:sticky;top:7rem}
+.prob-sticky-col .tag{color:var(--a)}
+.prob-sticky-h{font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;color:#F9F8F6;margin-top:.65rem;margin-bottom:1.5rem}
+.prob-sticky-sub{font-size:.88rem;color:rgba(249,248,246,.32);line-height:1.68;max-width:26ch}
+.prob-cards-col{display:flex;flex-direction:column;gap:1.2rem;padding-bottom:2rem}
+.pcard{border:1px solid rgba(255,255,255,.07);padding:2rem 2.25rem;cursor:default;transition:background .32s,border-color .38s,transform .4s cubic-bezier(.22,1,.36,1)}
+.pcard:hover{background:rgba(255,255,255,.05);border-color:rgba(232,80,42,.3);transform:translateY(-6px)}
+.pcard-n{font-size:.58rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:.65rem;display:block}
+.pcard-h{font-size:1.08rem;font-weight:800;color:#F9F8F6;margin-bottom:.55rem;letter-spacing:-.02em;line-height:1.18}
+.pcard-t{font-size:.88rem;color:rgba(249,248,246,.38);line-height:1.75}
+.trust-qs{margin-top:2rem;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.03)}
 .trust-intro{font-size:.82rem;color:rgba(249,248,246,.4);line-height:1.6;margin-bottom:1rem}
 .trust-q-list{display:flex;flex-direction:column;gap:.5rem}
 .trust-q{font-size:1.05rem;font-weight:700;color:rgba(249,248,246,.8);line-height:1.35}
-.prob-bridge{margin-top:3.5rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);font-size:1.05rem;font-weight:500;color:rgba(249,248,246,.5);line-height:1.72;max-width:68ch}
+.prob-bridge{margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.08);font-size:1rem;font-weight:500;color:rgba(249,248,246,.45);line-height:1.78;max-width:58ch}
 .prob-bridge strong{color:#F9F8F6;font-weight:700}
-.strips{border-top:1px solid var(--br)}
-.strip{display:grid;grid-template-columns:72px 1fr 1.8fr;gap:3rem;align-items:start;padding:3rem 0;border-bottom:1px solid var(--br);transition:background .18s,padding-left .18s;cursor:default}
-.strip:hover{background:var(--t);padding-left:1.5rem}
-.snum{font-size:1.05rem;font-weight:800;letter-spacing:.02em;color:var(--br);transition:color .18s;padding-top:.35rem;font-variant-numeric:tabular-nums}
-.strip:hover .snum{color:var(--a)}
-.stitle{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;color:var(--b);padding-top:.25rem}
-.ssub{font-size:.82rem;font-weight:600;color:var(--a);margin-top:.4rem;line-height:1.35}
-.sdesc{font-size:.93rem;color:var(--mid);line-height:1.82;padding-top:.5rem}
+/* ── Solution tabs ── */
+.sol-wrap{padding-top:4rem}
+.sol-label{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:1.75rem}
+.sol-tabs{display:flex;border-bottom:2px solid var(--br)}
+.sol-tab{flex:1;padding:1rem 1.5rem;background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:var(--f);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:color .22s,border-color .22s;text-align:left;line-height:1.4}
+.sol-tab:hover:not(.active){color:var(--b)}
+.sol-tab.active{color:var(--b);border-bottom-color:var(--a)}
+.sol-tab-n{display:block;font-size:.58rem;color:var(--a);margin-bottom:.28rem;letter-spacing:.2em}
+.sol-panel{display:none}
+.sol-panel.active{display:block;animation:panelIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sol-panel-inner{display:grid;grid-template-columns:1fr 2fr;gap:4rem;padding:3rem 0;border-bottom:1px solid var(--br)}
+.sol-num{font-size:clamp(3rem,6vw,5.5rem);font-weight:900;letter-spacing:-.06em;line-height:1;color:var(--br);font-variant-numeric:tabular-nums;display:block}
+.sol-h{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;color:var(--b);line-height:1.15;margin-top:.4rem}
+.sol-ssub{font-size:.82rem;font-weight:700;color:var(--a);margin-top:.55rem;line-height:1.4}
+.sol-desc{font-size:.95rem;color:var(--mid);line-height:1.85;padding-top:.2rem}
+.sol-desc p+p{margin-top:1em}
 .donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
 .dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
@@ -170,10 +187,13 @@ footer a:hover{color:var(--a)}
   .sec,.ep,.sp,.vid-sec{padding:4rem 1.25rem}
   footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.75rem;text-align:center}
   .filmstrip{grid-template-columns:repeat(2,1fr)}
-  .prob-band{padding:3rem 1.25rem}
-  .prob-grid{grid-template-columns:1fr}
-  .strip{grid-template-columns:1fr;gap:.5rem;padding:2rem 0}
-  .snum{font-size:.85rem}
+  .prob-sticky-row{grid-template-columns:1fr;gap:2.5rem}
+  .prob-sticky-col{position:static}
+  .prob-section{padding:4rem 1.25rem}
+  .sol-tabs{flex-direction:column;border-bottom:1px solid var(--br)}
+  .sol-tab{border-bottom:1px solid var(--br);padding:.85rem 1.25rem}
+  .sol-panel-inner{grid-template-columns:1fr;gap:1.75rem;padding:2rem 0}
+  .sol-num{font-size:3rem}
   .ep-grid,.vid-inner{grid-template-columns:1fr;gap:2.5rem}
   .ep-wm{display:none}
   .stats{grid-template-columns:1fr}
@@ -190,10 +210,9 @@ footer a:hover{color:var(--a)}
   .ksub,.mm-sub{font-size:.95rem}
   .g-lead{font-size:1.05rem}
   .g-body{font-size:.93rem}
-  .stitle{font-size:1.2rem}
-  .sdesc{font-size:.88rem}
-  .prob-item-head{font-size:1.05rem}
-  .prob-item-text{font-size:.85rem}
+  .sol-h{font-size:1.2rem}
+  .sol-desc{font-size:.9rem}
+  .pcard-h{font-size:1rem}
   .ep-text .intro{font-size:1rem}
   .ep-text .body{font-size:.9rem}
   .sn{font-size:2.6rem}
@@ -282,80 +301,118 @@ footer a:hover{color:var(--a)}
       </p>
     </div>
   </div>
-  <div class="prob-band r">
-    <div class="inn">
-      <span class="prob-band-label de">Das Grundproblem</span>
-      <span class="prob-band-label en">The core problem</span>
-      <div class="prob-grid">
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Keine Sichtbarkeit</span><span class="en">No visibility</span></p>
-          <p class="prob-item-text"><span class="de">Rescue Organisations haben kein Marketing-Budget und kein Team dafür. Also passiert — nichts. Potenzielle Unterstützer, Adoptanten und Spender wissen nicht, dass es sie gibt. Nicht weil die Arbeit fehlt, sondern weil niemand davon erzählt.</span><span class="en">Rescue organisations have no marketing budget and no team for it. So nothing happens. Potential supporters, adopters, and donors don't know they exist — not because the work isn't there, but because nobody's telling the story.</span></p>
-        </div>
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Kein Content, kein Kanal</span><span class="en">No content, no channel</span></p>
-          <p class="prob-item-text"><span class="de">Social Media ist heute der schnellste Weg, um Menschen zu erreichen und zu bewegen. Aber professionellen Content zu erstellen kostet Zeit, Geld und Know-how — alles Dinge, die Rescue Organisations nicht haben. Also bleibt der Kanal stumm. Und mit ihm die Geschichte, die eigentlich erzählt werden müsste.</span><span class="en">Social media is the fastest way to reach and move people today. But creating professional content takes time, money, and expertise — things rescue organisations simply don't have. So the channel stays silent. And with it: the story that deserves to be told.</span></p>
-        </div>
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Kein digitales Fundament</span><span class="en">No digital foundation</span></p>
-          <p class="prob-item-text"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
-        </div>
-      </div>
-      <div class="trust-qs r">
-        <p class="trust-intro">
-          <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
-          <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+  <!-- Problem section: sticky scroll + hover cards -->
+  <div class="prob-section">
+    <div class="prob-sticky-row">
+      <div class="prob-sticky-col r">
+        <span class="tag de">Das Grundproblem</span>
+        <span class="tag en">The core problem</span>
+        <p class="prob-sticky-h">
+          <span class="de">3 Gründe, warum gute Arbeit unsichtbar bleibt.</span>
+          <span class="en">3 reasons why great work stays invisible.</span>
         </p>
-        <div class="trust-q-list">
-          <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
-          <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
-          <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
-        </div>
+        <p class="prob-sticky-sub">
+          <span class="de">Und warum das kein Schicksal ist — sondern ein lösbares Problem.</span>
+          <span class="en">And why that's not fate — but a solvable problem.</span>
+        </p>
       </div>
-      <p class="prob-bridge">
-        <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
-        <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
-      </p>
+      <div class="prob-cards-col">
+        <div class="pcard r d1">
+          <span class="pcard-n">01</span>
+          <p class="pcard-h"><span class="de">Keine Sichtbarkeit</span><span class="en">No visibility</span></p>
+          <p class="pcard-t"><span class="de">Rescue Organisations haben kein Marketing-Budget und kein Team dafür. Also passiert — nichts. Potenzielle Unterstützer, Adoptanten und Spender wissen nicht, dass es sie gibt. Nicht weil die Arbeit fehlt, sondern weil niemand davon erzählt.</span><span class="en">Rescue organisations have no marketing budget and no team for it. So nothing happens. Potential supporters, adopters, and donors don't know they exist — not because the work isn't there, but because nobody's telling the story.</span></p>
+        </div>
+        <div class="pcard r d2">
+          <span class="pcard-n">02</span>
+          <p class="pcard-h"><span class="de">Kein Content, kein Kanal</span><span class="en">No content, no channel</span></p>
+          <p class="pcard-t"><span class="de">Social Media ist heute der schnellste Weg, um Menschen zu erreichen und zu bewegen. Aber professionellen Content zu erstellen kostet Zeit, Geld und Know-how — alles Dinge, die Rescue Organisations nicht haben. Also bleibt der Kanal stumm. Und mit ihm die Geschichte, die eigentlich erzählt werden müsste.</span><span class="en">Social media is the fastest way to reach and move people today. But creating professional content takes time, money, and expertise — things rescue organisations simply don't have. So the channel stays silent. And with it: the story that deserves to be told.</span></p>
+        </div>
+        <div class="pcard r d3">
+          <span class="pcard-n">03</span>
+          <p class="pcard-h"><span class="de">Kein digitales Fundament</span><span class="en">No digital foundation</span></p>
+          <p class="pcard-t"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
+        </div>
+        <div class="trust-qs r">
+          <p class="trust-intro">
+            <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
+            <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+          </p>
+          <div class="trust-q-list">
+            <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
+            <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
+            <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
+          </div>
+        </div>
+        <p class="prob-bridge r">
+          <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
+          <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
+        </p>
+      </div>
     </div>
   </div>
+  <!-- Solution tabs -->
   <div class="inn">
-    <div class="strips">
-      <div class="strip r d1">
-        <span class="snum">01</span>
-        <div>
-          <div class="stitle"><span class="de">Die Dokumentation</span><span class="en">The documentary</span></div>
-          <p class="ssub"><span class="de">Wir kommen, wir drehen, wir erzählen eure Geschichte.</span><span class="en">We come, we film, we tell your story.</span></p>
-        </div>
-        <p class="sdesc"><span class="de">Eine Woche lang sind wir wirklich dabei — nicht als Kamerateam, das seine Liste abarbeitet, sondern als Menschen, die verstehen wollen. Wir begleiten den Alltag im Shelter, lernen die Tiere kennen, hören den Menschen zu. Und irgendwo dazwischen entstehen die Momente, die man nicht planen kann — die echten. Das Ergebnis ist ein professionell produzierter Dokumentarfilm auf YouTube. Kein Spendenaufruf. Keine Werbung. Eine Geschichte, die bewegt — weil sie wahr ist.</span><span class="en">For a week, we're truly there — not as a camera crew working through a shot list, but as people who genuinely want to understand. We follow the shelter's everyday life, get to know the animals, listen to the people behind it all. And somewhere in between, the moments emerge that can't be planned — the real ones. The result: a professionally produced documentary on YouTube. Not a fundraiser video. Not an ad. A story that moves people — because it's true.</span></p>
+    <div class="sol-wrap r">
+      <span class="sol-label de">Die Lösung</span><span class="sol-label en">The solution</span>
+      <div class="sol-tabs" role="tablist">
+        <button class="sol-tab active" role="tab" onclick="switchTab(0)">
+          <span class="sol-tab-n">01</span>
+          <span class="de">Die Dokumentation</span><span class="en">The documentary</span>
+        </button>
+        <button class="sol-tab" role="tab" onclick="switchTab(1)">
+          <span class="sol-tab-n">02</span>
+          <span>Social Media &amp; Content</span>
+        </button>
+        <button class="sol-tab" role="tab" onclick="switchTab(2)">
+          <span class="sol-tab-n">03</span>
+          <span class="de">Die neue Website</span><span class="en">The new website</span>
+        </button>
       </div>
-      <div class="strip r d2">
-        <span class="snum">02</span>
-        <div>
-          <div class="stitle"><span class="de">Social Media &amp; Content</span><span class="en">Social Media &amp; Content</span></div>
-          <p class="ssub"><span class="de">Was bleibt, wenn wir wieder weg sind.</span><span class="en">What stays long after we leave.</span></p>
+      <div class="sol-panels">
+        <div class="sol-panel active">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">01</span>
+              <p class="sol-h"><span class="de">Die Dokumentation</span><span class="en">The documentary</span></p>
+              <p class="sol-ssub"><span class="de">Wir kommen, wir drehen, wir erzählen eure Geschichte.</span><span class="en">We come, we film, we tell your story.</span></p>
+            </div>
+            <p class="sol-desc"><span class="de">Eine Woche lang sind wir wirklich dabei — nicht als Kamerateam, das seine Liste abarbeitet, sondern als Menschen, die verstehen wollen. Wir begleiten den Alltag im Shelter, lernen die Tiere kennen, hören den Menschen zu. Und irgendwo dazwischen entstehen die Momente, die man nicht planen kann — die echten. Das Ergebnis ist ein professionell produzierter Dokumentarfilm auf YouTube. Kein Spendenaufruf. Keine Werbung. Eine Geschichte, die bewegt — weil sie wahr ist.</span><span class="en">For a week, we're truly there — not as a camera crew working through a shot list, but as people who genuinely want to understand. We follow the shelter's everyday life, get to know the animals, listen to the people behind it all. And somewhere in between, the moments emerge that can't be planned — the real ones. The result: a professionally produced documentary on YouTube. Not a fundraiser video. Not an ad. A story that moves people — because it's true.</span></p>
+          </div>
         </div>
-        <p class="sdesc"><span class="de">Nebenbei — aber alles andere als nebensächlich. Während der Dokumentarfilm entsteht, sammeln wir gleichzeitig Material, das einer Organisation Monate lang trägt: kurze Clips, Reels, Fotos — fertig für Instagram, Facebook und TikTok. Wir erarbeiten gemeinsam eine Strategie: Wer ist die Zielgruppe? Was wird gepostet, wann und warum? Wie baut man eine echte Community auf? Am Ende wissen sie nicht nur, wie es geht — sie haben es selbst erlebt. Für Organisationen, die es möchten, übernehmen wir danach auch die laufende Kanalbetreuung.</span><span class="en">As a side effect — but anything but secondary. While the documentary takes shape, we gather material that keeps giving for months: short clips, reels, photos — ready for Instagram, Facebook, and TikTok. Together we build a strategy: who is the audience, what gets posted, when and why, and how to grow a real community. By the end, they don't just know how it works — they've lived it. For organisations that want it, we can also take over ongoing channel management.</span></p>
-      </div>
-      <div class="strip r d3">
-        <span class="snum">03</span>
-        <div>
-          <div class="stitle"><span class="de">Die neue Website</span><span class="en">The new website</span></div>
-          <p class="ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
+        <div class="sol-panel">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">02</span>
+              <p class="sol-h">Social Media &amp; Content</p>
+              <p class="sol-ssub"><span class="de">Was bleibt, wenn wir wieder weg sind.</span><span class="en">What stays long after we leave.</span></p>
+            </div>
+            <p class="sol-desc"><span class="de">Nebenbei — aber alles andere als nebensächlich. Während der Dokumentarfilm entsteht, sammeln wir gleichzeitig Material, das einer Organisation Monate lang trägt: kurze Clips, Reels, Fotos — fertig für Instagram, Facebook und TikTok. Wir erarbeiten gemeinsam eine Strategie: Wer ist die Zielgruppe? Was wird gepostet, wann und warum? Wie baut man eine echte Community auf? Am Ende wissen sie nicht nur, wie es geht — sie haben es selbst erlebt. Für Organisationen, die es möchten, übernehmen wir danach auch die laufende Kanalbetreuung.</span><span class="en">As a side effect — but anything but secondary. While the documentary takes shape, we gather material that keeps giving for months: short clips, reels, photos — ready for Instagram, Facebook, and TikTok. Together we build a strategy: who is the audience, what gets posted, when and why, and how to grow a real community. By the end, they don't just know how it works — they've lived it. For organisations that want it, we can also take over ongoing channel management.</span></p>
+          </div>
         </div>
-        <div>
-          <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
-          <div class="donate-viz">
-            <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
-            <div class="tank-row">
-              <div class="tank-item">
-                <canvas class="tank-canvas" id="tank-canvas"></canvas>
-                <span class="tank-lbl"><span class="de">Wasser · 65 %</span><span class="en">Water · 65 %</span></span>
-              </div>
-              <div class="tank-item">
-                <canvas class="tank-canvas" id="food-canvas"></canvas>
-                <span class="tank-lbl"><span class="de">Futter · 40 %</span><span class="en">Food · 40 %</span></span>
+        <div class="sol-panel">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">03</span>
+              <p class="sol-h"><span class="de">Die neue Website</span><span class="en">The new website</span></p>
+              <p class="sol-ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
+            </div>
+            <div class="sol-desc">
+              <p><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
+              <div class="donate-viz">
+                <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
+                <div class="tank-row">
+                  <div class="tank-item">
+                    <canvas class="tank-canvas" id="tank-canvas"></canvas>
+                    <span class="tank-lbl"><span class="de">Wasser · 65 %</span><span class="en">Water · 65 %</span></span>
+                  </div>
+                  <div class="tank-item">
+                    <canvas class="tank-canvas" id="food-canvas"></canvas>
+                    <span class="tank-lbl"><span class="de">Futter · 40 %</span><span class="en">Food · 40 %</span></span>
+                  </div>
+                </div>
+                <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
               </div>
             </div>
-            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
           </div>
         </div>
       </div>
@@ -823,5 +880,24 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
     entries.forEach(function(e){if(e.isIntersecting&&!started){started=true;io2.disconnect();requestAnimationFrame(frame);}});
   },{threshold:0.3});
   io2.observe(cv);
+})();
+
+// Tab switching
+function switchTab(i){
+  var tabs=document.querySelectorAll('.sol-tab');
+  var panels=document.querySelectorAll('.sol-panel');
+  tabs.forEach(function(t,idx){t.classList.toggle('active',idx===i);});
+  panels.forEach(function(p,idx){p.classList.toggle('active',idx===i);});
+}
+
+// Parallax on #konzept heading
+(function(){
+  var h=document.querySelector('#konzept .konz-head');
+  if(!h) return;
+  window.addEventListener('scroll',function(){
+    var rect=h.getBoundingClientRect();
+    var offset=rect.top*0.18;
+    h.style.transform='translateY('+offset+'px)';
+  },{passive:true});
 })();
 </script>
