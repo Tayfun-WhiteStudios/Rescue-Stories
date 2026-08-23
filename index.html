@@ -56,12 +56,17 @@ h2 i{font-style:normal;color:var(--a)}
 .g-body p+p{margin-top:1em}
 .qblock{margin-top:1.5rem;padding:1.25rem 1.5rem;border-left:3px solid var(--a);background:var(--a10);font-size:.98rem;font-style:italic;font-weight:500;color:var(--b);line-height:1.65}
 .vid-sec{background:#0D0D0C;padding:7rem 2rem}
-.vid-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.vid-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:6rem;align-items:center}
 .vid-text .tag{color:var(--a)}
-.vid-text h2{color:#F9F8F6;font-size:clamp(1.8rem,4vw,3.5rem)}
+.vid-text h2{color:#F9F8F6;font-size:clamp(1.8rem,4vw,3.2rem)}
 .vid-text p{font-size:1rem;color:rgba(249,248,246,.5);line-height:1.78;margin-top:1.25rem;max-width:42ch}
-.vid-player{display:flex;justify-content:center}
-.vid-player video{width:100%;max-width:340px;aspect-ratio:9/16;display:block;object-fit:cover;background:#1a1a1a}
+.vid-player{display:flex;justify-content:center;position:relative}
+.vid-player video{width:100%;max-width:360px;aspect-ratio:9/16;display:block;object-fit:cover;background:#111;border-radius:2px}
+.vid-src-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:.28rem .85rem;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none}
+.vid-stats{display:flex;gap:2rem;margin-top:2.25rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08)}
+.vid-stat{}
+.vid-stat-num{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:#F9F8F6;display:block}
+.vid-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(249,248,246,.3);display:block;margin-top:.35rem}
 .khead{max-width:760px;margin-bottom:3.5rem}
 .ksub{font-size:1.1rem;color:var(--mid);line-height:1.72;max-width:58ch;margin-top:1.2rem}
 /* ── Problem section: sticky scroll ── */
@@ -222,6 +227,8 @@ footer a:hover{color:var(--a)}
   .khead{margin-bottom:2.5rem}
   .mm-head{margin-bottom:2.5rem}
   .vid-player iframe{max-width:100%!important}
+  .vid-stats{gap:1.5rem}
+  .vid-stat-num{font-size:2rem}
   .wb-list{grid-template-columns:1fr}
   .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
   .quote-sec{padding:5rem 1.25rem}
@@ -615,22 +622,38 @@ footer a:hover{color:var(--a)}
 
 <section class="vid-sec">
   <div class="vid-inner">
-    <div class="vid-text r">
+    <div class="vid-player r">
+      <video controls playsinline preload="metadata">
+        <source src="assets/oreo.MOV" type="video/mp4">
+      </video>
+      <span class="vid-src-badge">Instagram Original</span>
+    </div>
+    <div class="vid-text r d2">
       <span class="tag de">Die Abholung</span>
       <span class="tag en">The pickup</span>
       <h2>
-        <span class="de">Zwei Minuten, die <i>alles sagen.</i></span>
-        <span class="en">Two minutes that <i>say it all.</i></span>
+        <span class="de">Der Tag, an dem <i>Oreo gefunden wurde.</i></span>
+        <span class="en">The day <i>Oreo was found.</i></span>
       </h2>
       <p>
-        <span class="de">Zwei Minuten, die zeigen, worum es geht: echte Geschichten, echte Emotionen — und was passiert, wenn man einfach hinfährt und anfängt zu filmen.</span>
-        <span class="en">Two minutes that show what this is about: real stories, real emotions — and what happens when you simply go there and start filming.</span>
+        <span class="de">Dieses Video zeigt den Moment, in dem Oreo zum ersten Mal aus der Straße gerettet wurde — roh, ungeplant, echt. Gepostet auf Instagram, wurde es zu einem der meistgesehenen Beiträge auf unserem Kanal. Nicht weil es perfekt produziert war. Sondern weil echte Geschichten echte Menschen berühren.</span>
+        <span class="en">This video captures the moment Oreo was rescued from the street — raw, unplanned, real. Posted to Instagram, it became one of the most-watched posts on our channel. Not because it was perfectly produced. But because real stories move real people.</span>
       </p>
-    </div>
-    <div class="vid-player r d2">
-      <video controls playsinline preload="metadata" style="width:100%;max-width:340px;aspect-ratio:9/16;display:block;background:#111">
-        <source src="assets/Oreo abholung.mp4" type="video/mp4">
-      </video>
+      <div class="vid-stats">
+        <div class="vid-stat r d1">
+          <span class="vid-stat-num">100K+</span>
+          <span class="vid-stat-lbl">Views</span>
+        </div>
+        <div class="vid-stat r d2">
+          <span class="vid-stat-num">6.000+</span>
+          <span class="vid-stat-lbl"><span class="de">Likes</span><span class="en">Likes</span></span>
+        </div>
+        <div class="vid-stat r d3">
+          <span class="vid-stat-num de">Organisch</span>
+          <span class="vid-stat-num en">Organic</span>
+          <span class="vid-stat-lbl"><span class="de">Reichweite</span><span class="en">reach</span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
