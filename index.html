@@ -188,6 +188,14 @@ h2 i{font-style:normal;color:var(--a)}
 .quote-sec{background:#0D0D0C;padding:8rem 2rem;text-align:center}
 .main-quote{font-size:clamp(1.6rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.2;color:#F9F8F6;max-width:22ch;margin:0 auto;text-wrap:balance}
 .quote-attr{display:block;margin-top:2.5rem;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--a)}
+.imp-sec{background:var(--t);border-top:1px solid var(--br);padding:3.5rem 2rem}
+.imp-inn{max-width:1100px;margin:0 auto}
+.imp-title{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:2rem}
+.imp-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.imp-h{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.65rem}
+.imp-body{font-size:.85rem;color:var(--b);line-height:1.72}
+.imp-body a{color:var(--mid);text-decoration:none}
+.imp-body a:hover{color:var(--a)}
 footer{border-top:1px solid var(--br);padding:2rem;display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--mid)}
 footer a{color:inherit;text-decoration:none}
 footer a:hover{color:var(--a)}
@@ -302,6 +310,8 @@ footer a:hover{color:var(--a)}
   .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
 
   /* ── Footer ── */
+  .imp-sec{padding:2.5rem 1.25rem}
+  .imp-cols{grid-template-columns:1fr;gap:1.75rem}
   footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.75rem;text-align:center}
 }
 @media(max-width:400px){
@@ -775,9 +785,29 @@ footer a:hover{color:var(--a)}
   </div>
 </section>
 
+<section id="impressum" class="imp-sec">
+  <div class="imp-inn">
+    <p class="imp-title"><span class="de">Impressum</span><span class="en">Legal notice</span></p>
+    <div class="imp-cols">
+      <div>
+        <p class="imp-h">Angaben gemäß § 5 TMG</p>
+        <p class="imp-body">White Studios<br>Inhaber: Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+      </div>
+      <div>
+        <p class="imp-h">Kontakt</p>
+        <p class="imp-body"><a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a></p>
+      </div>
+      <div>
+        <p class="imp-h"><span class="de">Verantwortlich für den Inhalt</span><span class="en">Responsible for content</span></p>
+        <p class="imp-body">Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <span>© 2026 Rescue Stories</span>
-  <span><a href="mailto:hello@rescuestories.com">hello@rescuestories.com</a> · <a href="#"><span class="de">Impressum</span><span class="en">Legal notice</span></a></span>
+  <span>© 2026 Rescue Stories — <span class="de">Ein Projekt von</span><span class="en">A project by</span> White Studios</span>
+  <span><a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a> · <a href="#impressum"><span class="de">Impressum</span><span class="en">Legal notice</span></a></span>
 </footer>
 
 <script>
