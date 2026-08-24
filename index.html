@@ -32,8 +32,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hbg{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.9) 0%,rgba(13,13,12,.45) 45%,rgba(13,13,12,.38) 100%)}
 .hc{position:relative}
 .hlabel{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,248,246,.85);margin-bottom:2rem;line-height:1;border:1.5px solid rgba(255,255,255,.35);padding:.45rem 1rem;border-radius:2px;position:relative;overflow:hidden}
-.hlabel::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);animation:hlShimmer 3.5s ease-in-out infinite}
-@keyframes hlShimmer{0%{transform:translateX(-120%)}40%,100%{transform:translateX(220%)}}
+.hlabel::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);animation:hlShimmer 7s ease-in-out infinite}
+@keyframes hlShimmer{0%{transform:translateX(-120%)}25%,100%{transform:translateX(220%)}}
 h1{font-size:clamp(3.2rem,9.5vw,10rem);font-weight:900;line-height:.93;letter-spacing:-.045em;color:#F9F8F6;text-wrap:balance;margin-bottom:3rem}
 h1 i{font-style:normal;color:var(--a)}
 .hfoot{display:flex;align-items:flex-end;justify-content:space-between}
