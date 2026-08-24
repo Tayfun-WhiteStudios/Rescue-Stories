@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum — Rescue Stories</title>
+<style>
+:root{--w:#F9F8F6;--b:#0D0D0C;--a:#E8502A;--mid:#717170;--br:#E5E4E0;--t:#F3F2EF;--f:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}}
+:root[data-theme="light"]{--w:#F9F8F6;--b:#0D0D0C;--br:#E5E4E0;--t:#F3F2EF;--mid:#717170}
+:root[data-theme="dark"]{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--w);color:var(--b);font-family:var(--f);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,13,12,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F9F8F6;text-decoration:none}
+.logo b{color:#E8502A}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.lt{display:flex;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;overflow:hidden}
+.lb{padding:.28rem .9rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:rgba(249,248,246,.55);cursor:pointer;border-radius:100px;font-family:var(--f);transition:all .18s}
+.lb.on{background:#E8502A;color:#fff}
+.theme-btn{width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:rgba(249,248,246,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0}
+.theme-btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-lang="en"] .de{display:none!important}
+:root[data-lang="de"] .en{display:none!important}
+.legal-wrap{max-width:780px;margin:0 auto;padding:5rem 2rem 7rem}
+.back{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;margin-bottom:3.5rem;transition:color .18s}
+.back:hover{color:var(--a)}
+.back svg{width:.85rem;height:.85rem;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.legal-tag{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:1rem}
+.legal-h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.035em;line-height:1.06;color:var(--b);margin-bottom:3rem}
+.legal-block{padding:2rem 0;border-bottom:1px solid var(--br)}
+.legal-block:last-of-type{border-bottom:none}
+.legal-block-h{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:.75rem}
+.legal-block p{font-size:.95rem;color:var(--mid);line-height:1.78}
+.legal-block p+p{margin-top:.75rem}
+.legal-block a{color:var(--b);text-decoration:underline;text-underline-offset:3px}
+.legal-block a:hover{color:var(--a)}
+.legal-stand{font-size:.72rem;color:var(--mid);margin-top:3rem;padding-top:2rem;border-top:1px solid var(--br)}
+footer{border-top:1px solid var(--br);padding:1.5rem 2rem;font-size:.76rem;color:var(--mid);text-align:center}
+footer a{color:inherit;text-decoration:none}
+footer a:hover{color:var(--a)}
+@media(max-width:600px){.legal-wrap{padding:3rem 1.25rem 5rem}nav{padding:.85rem 1.25rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">Rescue <b>Stories</b></a>
+  <div class="nav-right">
+    <div class="lt" role="group">
+      <button class="lb on" id="bd" onclick="setL('de')">DE</button>
+      <button class="lb" id="be" onclick="setL('en')">EN</button>
+    </div>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Theme wechseln">
+      <svg id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+<main class="legal-wrap">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><span class="de">Zurück</span><span class="en">Back</span></a>
+  <span class="legal-tag"><span class="de">Rechtliches</span><span class="en">Legal</span></span>
+  <h1 class="legal-h1"><span class="de">Impressum</span><span class="en">Legal notice</span></h1>
+  <div class="legal-block">
+    <p class="legal-block-h">Angaben gemäß § 5 TMG</p>
+    <p>White Studios<br>Inhaber: Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">Kontakt</p>
+    <p><a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a></p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h"><span class="de">Verantwortlich für den Inhalt</span><span class="en">Responsible for content</span></p>
+    <p>Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+  </div>
+  <p class="legal-stand">Stand: August 2026</p>
+</main>
+<footer>© 2026 Rescue Stories — White Studios · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>
+<script>
+function setL(l){document.documentElement.dataset.lang=l;document.getElementById('bd').classList.toggle('on',l==='de');document.getElementById('be').classList.toggle('on',l==='en');}
+function applyTheme(t){document.documentElement.dataset.theme=t;document.getElementById('icon-sun').style.display=t==='dark'?'block':'none';document.getElementById('icon-moon').style.display=t==='light'?'block':'none';}
+function toggleTheme(){const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);localStorage.setItem('rs-theme',next);}
+(function(){const t=localStorage.getItem('rs-theme')||'dark';applyTheme(t);const l=localStorage.getItem('rs-lang')||'de';document.documentElement.dataset.lang=l;document.getElementById('bd').classList.toggle('on',l==='de');document.getElementById('be').classList.toggle('on',l==='en');})();
+</script>
+</body>
+</html>
