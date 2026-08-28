@@ -154,8 +154,9 @@ h2 i{font-style:normal;color:var(--a)}
 .sl{display:block;font-size:.72rem;color:rgba(249,248,246,.35);font-weight:500;letter-spacing:.06em;margin-top:.5rem}
 .sp{background:var(--t);padding:7rem 2rem;border-top:1px solid var(--br);position:relative;overflow:hidden}
 .sp-inn{max-width:1100px;margin:0 auto;position:relative}
-.sp-head{margin-bottom:4rem}
-.sp-logo{height:90px;width:auto;display:block;filter:var(--logo-filter,none);margin-bottom:1.1rem}
+.sp-head{margin-bottom:4rem;padding-top:8rem}
+.sp-logo-wrap{position:absolute;left:0;top:0;pointer-events:auto}
+.sp-logo{height:120px;width:auto;display:block;filter:var(--logo-filter,none)}
 .sp-logo-text{font-size:1.6rem;font-weight:900;letter-spacing:-.04em;color:var(--b)}
 @media(prefers-color-scheme:dark){:root{--logo-filter:invert(1)}}
 :root[data-theme="dark"]{--logo-filter:invert(1)}
@@ -304,8 +305,8 @@ footer a:hover{color:var(--a)}
   .sn{font-size:2.6rem}
 
   /* ── Sponsor ── */
-  .sp-head{margin-bottom:2.5rem}
-  .sp-logo{height:44px}
+  .sp-head{margin-bottom:2.5rem;padding-top:6rem}
+  .sp-logo{height:72px}
   .sp-product-wrap{right:-3rem;top:-1rem}
   .sp-product{width:220px;opacity:.25}
   .sp-contrib{grid-template-columns:1fr}
@@ -616,10 +617,10 @@ footer a:hover{color:var(--a)}
     <div class="sp-product-wrap">
       <img class="sp-product" src="assets/Collar.png" alt="Bullsland Dogwear Halsband">
     </div>
+    <a class="sp-logo-wrap" href="https://www.bullsland.de/" target="_blank" rel="noopener" aria-label="Bullsland Dogwear Website">
+      <img class="sp-logo" src="assets/Bullsland-Dogwear-Logo.png" alt="Bullsland Dogwear">
+    </a>
     <div class="sp-head">
-      <a href="https://www.bullsland.de/" target="_blank" rel="noopener" aria-label="Bullsland Dogwear Website">
-        <img class="sp-logo" src="assets/Bullsland-Dogwear-Logo.png" alt="Bullsland Dogwear">
-      </a>
       <span class="tag de">Pilot-Sponsor</span>
       <span class="tag en">Pilot sponsor</span>
       <h2 style="margin-top:.5rem">
