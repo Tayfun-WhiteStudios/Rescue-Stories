@@ -32,6 +32,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2rem 4.5rem;position:relative;overflow:hidden;background-size:cover;background-position:center 30%}
 .hbg{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.9) 0%,rgba(13,13,12,.45) 45%,rgba(13,13,12,.38) 100%)}
 .hc{position:relative}
+.hero-arrow{display:none;position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);flex-direction:column;align-items:center;gap:.35rem;color:rgba(255,255,255,.4);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+.hero-arrow svg{width:22px;height:22px;animation:arrowBounce 2s ease-in-out infinite}
+@keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 .hlabel{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,248,246,.85);margin-bottom:2rem;line-height:1;border:1.5px solid rgba(255,255,255,.35);padding:.45rem 1rem;border-radius:2px;position:relative;overflow:hidden}
 .hlabel::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);animation:hlShimmer 9s ease-in-out infinite}
 @keyframes hlShimmer{0%{transform:translateX(-120%)}44%,100%{transform:translateX(220%)}}
@@ -220,7 +223,8 @@ footer a:hover{color:var(--a)}
   .lb{padding:.22rem .7rem;font-size:.64rem}
 
   /* ── Hero ── */
-  .hero{padding:6rem 1.25rem 3.5rem;min-height:100svh;justify-content:center}
+  .hero{padding:22svh 1.25rem 3.5rem;min-height:100svh;justify-content:flex-start}
+  .hero-arrow{display:flex}
   h1{font-size:clamp(1.75rem,7.5vw,2.8rem);margin-bottom:1.75rem;letter-spacing:-.025em;overflow-wrap:break-word;word-break:break-word;max-width:100%}
   .hlabel{margin-bottom:1rem;font-size:.75rem}
   .hsub{font-size:.9rem;line-height:1.65;max-width:100%}
@@ -371,6 +375,10 @@ footer a:hover{color:var(--a)}
         <span class="de">Entdecken</span><span class="en">Scroll</span>
       </div>
     </div>
+  </div>
+  <div class="hero-arrow" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Scroll</span>
   </div>
 </section>
 
