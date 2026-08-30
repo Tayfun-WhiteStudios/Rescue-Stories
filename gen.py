@@ -93,7 +93,7 @@ h2 i{font-style:normal;color:var(--a)}
 .vid-src-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:.28rem .85rem;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none}
 .vid-stats{display:flex;gap:2rem;margin-top:2.25rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08)}
 .vid-stat{}
-.vid-stat-num{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:#F9F8F6;display:block}
+.vid-stat-num{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:#F9F8F6;display:block;font-variant-numeric:tabular-nums;white-space:nowrap}
 .vid-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(249,248,246,.3);display:block;margin-top:.35rem}
 .khead{max-width:820px;margin:0 auto 3.5rem;text-align:center}
 .khead .tag{display:block;text-align:center}
@@ -303,9 +303,9 @@ footer a:hover{color:var(--a)}
   .vid-src-badge{top:8px;font-size:.55rem}
   .vid-text h2{font-size:clamp(1.5rem,6vw,2.2rem)}
   .vid-text p{font-size:.9rem;max-width:100%}
-  .vid-stats{gap:1.25rem;flex-wrap:wrap;margin-top:1.75rem;padding-top:1.75rem}
-  .vid-stat{min-width:5rem}
-  .vid-stat-num{font-size:1.8rem}
+  .vid-stats{gap:1.5rem;flex-wrap:nowrap;margin-top:1.75rem;padding-top:1.75rem}
+  .vid-stat{min-width:0;flex:1}
+  .vid-stat-num{font-size:1.6rem}
   .vid-stat-lbl{font-size:.58rem}
 
   /* ── Episode ── */
@@ -350,8 +350,8 @@ footer a:hover{color:var(--a)}
 }
 @media(max-width:400px){
   h1{font-size:clamp(1.6rem,7vw,2.4rem)}
-  .vid-stats{gap:1rem}
-  .vid-stat-num{font-size:1.6rem}
+  .vid-stats{gap:.85rem}
+  .vid-stat-num{font-size:1.35rem}
   .sol-tab{font-size:.64rem;padding:.75rem 1rem}
   .pcard{padding:1.25rem}
 }
