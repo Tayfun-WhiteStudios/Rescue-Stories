@@ -31,7 +31,8 @@ CSS = '''
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--w);color:var(--b);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,13,12,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
-.logo{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F9F8F6;text-decoration:none}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#F9F8F6;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.logo svg{height:30px;width:auto;display:block;flex-shrink:0}
 .logo b{color:var(--a)}
 .nav-right{display:flex;align-items:center;gap:.75rem}
 .lt{display:flex;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;overflow:hidden}
@@ -40,10 +41,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .theme-btn{width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:rgba(249,248,246,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0}
 .theme-btn:hover{background:rgba(255,255,255,.2);color:#fff}
 .theme-btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ig-btn{width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:rgba(249,248,246,.7);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .18s;flex-shrink:0}
+.ig-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.ig-btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2rem 4.5rem;position:relative;overflow:hidden;background-size:cover;background-position:center 30%}
 .hbg{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.9) 0%,rgba(13,13,12,.45) 45%,rgba(13,13,12,.38) 100%)}
 .hc{position:relative}
-.hlabel{font-size:.82rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1.75rem;line-height:1.7}
+.hero-arrow{display:none;position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);flex-direction:column;align-items:center;gap:.35rem;color:rgba(255,255,255,.4);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+.hero-arrow svg{width:22px;height:22px;animation:arrowBounce 2s ease-in-out infinite}
+@keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+.hlabel{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,248,246,.85);margin-bottom:2rem;line-height:1;border:1.5px solid rgba(255,255,255,.35);padding:.45rem 1rem;border-radius:2px;position:relative;overflow:hidden}
+.hlabel::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);animation:hlShimmer 9s ease-in-out infinite}
+@keyframes hlShimmer{0%{transform:translateX(-120%)}44%,100%{transform:translateX(220%)}}
 h1{font-size:clamp(3.2rem,9.5vw,10rem);font-weight:900;line-height:.93;letter-spacing:-.045em;color:#F9F8F6;text-wrap:balance;margin-bottom:3rem}
 h1 i{font-style:normal;color:var(--a)}
 .hfoot{display:flex;align-items:flex-end;justify-content:space-between}
@@ -75,33 +84,57 @@ h2 i{font-style:normal;color:var(--a)}
 .g-body p+p{margin-top:1em}
 .qblock{margin-top:1.5rem;padding:1.25rem 1.5rem;border-left:3px solid var(--a);background:var(--a10);font-size:.98rem;font-style:italic;font-weight:500;color:var(--b);line-height:1.65}
 .vid-sec{background:#0D0D0C;padding:7rem 2rem}
-.vid-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.vid-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:6rem;align-items:center}
 .vid-text .tag{color:var(--a)}
-.vid-text h2{color:#F9F8F6;font-size:clamp(1.8rem,4vw,3.5rem)}
+.vid-text h2{color:#F9F8F6;font-size:clamp(1.8rem,4vw,3.2rem)}
 .vid-text p{font-size:1rem;color:rgba(249,248,246,.5);line-height:1.78;margin-top:1.25rem;max-width:42ch}
-.vid-player{display:flex;justify-content:center}
-.vid-player video{width:100%;max-width:340px;aspect-ratio:9/16;display:block;object-fit:cover;background:#1a1a1a}
-.khead{max-width:760px;margin-bottom:3.5rem}
-.ksub{font-size:1.1rem;color:var(--mid);line-height:1.72;max-width:58ch;margin-top:1.2rem}
-.prob-band{background:#0D0D0C;padding:4rem;margin-bottom:0}
-.prob-band-label{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:2.5rem;display:block}
-.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
-.prob-item-head{font-size:1.18rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:#F9F8F6;margin-bottom:.65rem}
-.prob-item-text{font-size:.9rem;color:rgba(249,248,246,.42);line-height:1.75}
-.trust-qs{margin:2.5rem 0;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.04)}
+.vid-player{display:flex;justify-content:center;position:relative}
+.vid-player video{width:100%;max-width:360px;aspect-ratio:9/16;display:block;object-fit:cover;background:#111;border-radius:2px}
+.vid-src-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:.28rem .85rem;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none}
+.vid-stats{display:flex;gap:2rem;margin-top:2.25rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08)}
+.vid-stat{}
+.vid-stat-num{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:#F9F8F6;display:block}
+.vid-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(249,248,246,.3);display:block;margin-top:.35rem}
+.khead{max-width:820px;margin:0 auto 3.5rem;text-align:center}
+.khead .tag{display:block;text-align:center}
+.khead h2{text-align:center}
+.ksub{font-size:1.05rem;color:var(--mid);line-height:1.78;max-width:52ch;margin:1.5rem auto 0;text-align:center}
+/* ── Problem section: sticky scroll ── */
+.prob-section{background:#0D0D0C;padding:6rem 2rem;margin-top:3.5rem}
+.prob-sticky-row{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:5rem;align-items:start}
+.prob-sticky-col{position:sticky;top:7rem}
+.prob-sticky-col .tag{color:var(--a)}
+.prob-sticky-h{font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;color:#F9F8F6;margin-top:.65rem;margin-bottom:1.5rem}
+.prob-sticky-sub{font-size:.88rem;color:rgba(249,248,246,.32);line-height:1.68;max-width:26ch}
+.prob-cards-col{display:flex;flex-direction:column;gap:1.2rem;padding-bottom:2rem}
+.pcard{border:1px solid rgba(255,255,255,.07);padding:2rem 2.25rem;cursor:default;transition:background .32s,border-color .38s,transform .4s cubic-bezier(.22,1,.36,1)}
+.pcard:hover{background:rgba(255,255,255,.05);border-color:rgba(232,80,42,.3);transform:translateY(-6px)}
+.pcard-n{font-size:.58rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:.65rem;display:block}
+.pcard-h{font-size:1.08rem;font-weight:800;color:#F9F8F6;margin-bottom:.55rem;letter-spacing:-.02em;line-height:1.18}
+.pcard-t{font-size:.88rem;color:rgba(249,248,246,.38);line-height:1.75}
+.trust-qs{margin-top:2rem;padding:1.75rem 2rem;border-left:3px solid rgba(249,248,246,.12);background:rgba(255,255,255,.03)}
 .trust-intro{font-size:.82rem;color:rgba(249,248,246,.4);line-height:1.6;margin-bottom:1rem}
 .trust-q-list{display:flex;flex-direction:column;gap:.5rem}
 .trust-q{font-size:1.05rem;font-weight:700;color:rgba(249,248,246,.8);line-height:1.35}
-.prob-bridge{margin-top:3.5rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);font-size:1.05rem;font-weight:500;color:rgba(249,248,246,.5);line-height:1.72;max-width:68ch}
+.prob-bridge{margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.08);font-size:1rem;font-weight:500;color:rgba(249,248,246,.45);line-height:1.78;max-width:58ch}
 .prob-bridge strong{color:#F9F8F6;font-weight:700}
-.strips{border-top:1px solid var(--br)}
-.strip{display:grid;grid-template-columns:72px 1fr 1.8fr;gap:3rem;align-items:start;padding:3rem 0;border-bottom:1px solid var(--br);transition:background .18s,padding-left .18s;cursor:default}
-.strip:hover{background:var(--t);padding-left:1.5rem}
-.snum{font-size:1.05rem;font-weight:800;letter-spacing:.02em;color:var(--br);transition:color .18s;padding-top:.35rem;font-variant-numeric:tabular-nums}
-.strip:hover .snum{color:var(--a)}
-.stitle{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;color:var(--b);padding-top:.25rem}
-.ssub{font-size:.82rem;font-weight:600;color:var(--a);margin-top:.4rem;line-height:1.35}
-.sdesc{font-size:.93rem;color:var(--mid);line-height:1.82;padding-top:.5rem}
+/* ── Solution tabs ── */
+.sol-wrap{padding-top:4rem}
+.sol-label{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:1.75rem}
+.sol-tabs{display:flex;border-bottom:2px solid var(--br)}
+.sol-tab{flex:1;padding:1rem 1.5rem;background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:var(--f);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:color .22s,border-color .22s;text-align:left;line-height:1.4}
+.sol-tab:hover:not(.active){color:var(--b)}
+.sol-tab.active{color:var(--b);border-bottom-color:var(--a)}
+.sol-tab-n{display:block;font-size:.58rem;color:var(--a);margin-bottom:.28rem;letter-spacing:.2em}
+.sol-panel{display:none}
+.sol-panel.active{display:block;animation:panelIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sol-panel-inner{display:grid;grid-template-columns:1fr 2fr;gap:4rem;padding:3rem 0;border-bottom:1px solid var(--br)}
+.sol-num{font-size:clamp(3rem,6vw,5.5rem);font-weight:900;letter-spacing:-.06em;line-height:1;color:var(--br);font-variant-numeric:tabular-nums;display:block}
+.sol-h{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;color:var(--b);line-height:1.15;margin-top:.4rem}
+.sol-ssub{font-size:.82rem;font-weight:700;color:var(--a);margin-top:.55rem;line-height:1.4}
+.sol-desc{font-size:.95rem;color:var(--mid);line-height:1.85;padding-top:.2rem}
+.sol-desc p+p{margin-top:1em}
 .donate-viz{margin-top:2rem;padding:1.5rem;border:1px solid var(--br);background:var(--t)}
 .dv-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem;display:block}
 .dv-caption{font-size:.78rem;color:var(--mid);line-height:1.6;font-style:italic;margin-top:1rem}
@@ -138,17 +171,20 @@ h2 i{font-style:normal;color:var(--a)}
 .sbox:last-child{border-right:none}
 .sn{display:block;font-size:3.2rem;font-weight:900;letter-spacing:-.04em;color:var(--a);line-height:1;font-variant-numeric:tabular-nums}
 .sl{display:block;font-size:.72rem;color:rgba(249,248,246,.35);font-weight:500;letter-spacing:.06em;margin-top:.5rem}
-.sp{background:var(--t);padding:7rem 2rem;border-top:1px solid var(--br)}
-.sp-inn{max-width:1100px;margin:0 auto}
-.sp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:4rem;flex-wrap:wrap;margin-bottom:4rem}
-.sp-logo-wrap{flex-shrink:0}
-.sp-logo{height:80px;width:auto;display:block;filter:var(--logo-filter,none)}
+.sp{background:var(--t);padding:7rem 2rem;border-top:1px solid var(--br);position:relative;overflow:hidden}
+.sp-inn{max-width:1100px;margin:0 auto;position:relative}
+.sp-head{margin-bottom:4rem;padding-top:8rem}
+.sp-logo-wrap{position:absolute;left:0;top:0;pointer-events:auto}
+.sp-logo{height:120px;width:auto;display:block;filter:var(--logo-filter,none)}
 .sp-logo-text{font-size:1.6rem;font-weight:900;letter-spacing:-.04em;color:var(--b)}
 @media(prefers-color-scheme:dark){:root{--logo-filter:invert(1)}}
 :root[data-theme="dark"]{--logo-filter:invert(1)}
 :root[data-theme="light"]{--logo-filter:none}
 .sp-intro{max-width:52ch}
 .sp-intro p{font-size:1rem;color:var(--mid);line-height:1.78}
+.sp-product-wrap{position:absolute;right:-4rem;top:-5rem;pointer-events:none;z-index:1}
+.sp-product{width:420px;height:auto;transform:rotate(40deg);animation:spFloat 6s ease-in-out infinite;will-change:transform}
+@keyframes spFloat{0%,100%{transform:rotate(40deg) translateY(0)}50%{transform:rotate(40deg) translateY(-14px)}}
 .sp-contrib{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
 .sp-item{background:var(--w);padding:2.25rem}
 .sp-item-num{font-size:.65rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:.85rem}
@@ -176,6 +212,19 @@ h2 i{font-style:normal;color:var(--a)}
 .quote-sec{background:#0D0D0C;padding:8rem 2rem;text-align:center}
 .main-quote{font-size:clamp(1.6rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.2;color:#F9F8F6;max-width:22ch;margin:0 auto;text-wrap:balance}
 .quote-attr{display:block;margin-top:2.5rem;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--a)}
+.imp-sec{background:var(--t);border-top:1px solid var(--br);padding:3.5rem 2rem}
+.imp-inn{max-width:1100px;margin:0 auto}
+.imp-title{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);margin-bottom:2rem}
+.imp-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.imp-h{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:.65rem}
+.imp-body{font-size:.85rem;color:var(--b);line-height:1.72}
+.imp-body a{color:var(--mid);text-decoration:none}
+.imp-body a:hover{color:var(--a)}
+.dse-sec{border-top:none}
+.dse-body{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem 3rem;margin-top:.5rem}
+.dse-block{}
+.dse-stand{font-size:.72rem;color:var(--mid);margin-top:.5rem;grid-column:1/-1}
+@media(max-width:780px){.dse-body{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--br);padding:2rem;display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--mid)}
 footer a{color:inherit;text-decoration:none}
 footer a:hover{color:var(--a)}
@@ -184,48 +233,127 @@ footer a:hover{color:var(--a)}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 @media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}.sbar,.mqi{animation:none}}
 @media(max-width:780px){
+  /* ── Nav ── */
   nav{padding:.85rem 1.25rem}
-  .hero{padding:0 1.25rem 3.5rem}
+  .lb{padding:.22rem .7rem;font-size:.64rem}
+
+  /* ── Hero ── */
+  .hero{padding:22svh 1.25rem 3.5rem;min-height:100svh;justify-content:flex-start}
+  .hero-arrow{display:flex}
+  h1{font-size:clamp(1.75rem,7.5vw,2.8rem);margin-bottom:1.75rem;letter-spacing:-.025em;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+  .hlabel{margin-bottom:1rem;font-size:.75rem}
+  .hsub{font-size:.9rem;line-height:1.65;max-width:100%}
+  .hfoot{flex-direction:column;align-items:flex-start;gap:1.5rem}
+  .scroll-ind{display:none}
+
+  /* ── Section padding ── */
   .sec,.ep,.sp,.vid-sec{padding:4rem 1.25rem}
-  footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.75rem;text-align:center}
-  .filmstrip{grid-template-columns:repeat(2,1fr)}
-  .prob-band{padding:3rem 1.25rem}
-  .prob-grid{grid-template-columns:1fr}
-  .strip{grid-template-columns:1fr;gap:.5rem;padding:2rem 0}
-  .snum{font-size:.85rem}
-  .ep-grid,.vid-inner{grid-template-columns:1fr;gap:2.5rem}
-  .ep-wm{display:none}
-  .stats{grid-template-columns:1fr}
-  .sbox{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-  .sbox:last-child{border-bottom:none}
-  .cards{grid-template-columns:1fr}
-  .sp-head{flex-direction:column-reverse;gap:2rem}
-  .sp-contrib{grid-template-columns:1fr}
-  .hfoot{flex-direction:column;align-items:flex-start;gap:2rem}
-  h1{font-size:clamp(1.5rem,7.5vw,3rem);margin-bottom:2rem}
-  h2{font-size:clamp(1.5rem,7vw,2.5rem)}
-  .hlabel{margin-bottom:1rem}
-  .hsub{font-size:.92rem;line-height:1.65}
-  .ksub,.mm-sub{font-size:.95rem}
-  .g-lead{font-size:1.05rem}
-  .g-body{font-size:.93rem}
-  .stitle{font-size:1.2rem}
-  .sdesc{font-size:.88rem}
-  .prob-item-head{font-size:1.05rem}
-  .prob-item-text{font-size:.85rem}
-  .ep-text .intro{font-size:1rem}
-  .ep-text .body{font-size:.9rem}
-  .sn{font-size:2.6rem}
-  .sp-logo{height:56px}
-  .sp-item{padding:1.75rem}
-  .sp-item-title{font-size:1rem}
-  .khead{margin-bottom:2.5rem}
-  .mm-head{margin-bottom:2.5rem}
-  .vid-player iframe{max-width:100%!important}
-  .wb-list{grid-template-columns:1fr}
-  .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
+  .sec.t{padding:3.5rem 1.25rem}
+  .prob-section{padding:3.5rem 1.25rem;margin-top:0}
   .quote-sec{padding:5rem 1.25rem}
-  .trust-qs{padding:1.25rem}
+
+  /* ── Typography ── */
+  h2{font-size:clamp(1.6rem,7vw,2.6rem);letter-spacing:-.025em}
+  .ksub,.mm-sub{font-size:.93rem;line-height:1.68}
+  .g-lead{font-size:1rem}
+  .g-body{font-size:.91rem}
+
+  /* ── Filmstrip ── */
+  .filmstrip{grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:2.5rem}
+  .moment-text{font-size:.78rem}
+
+  /* ── Konzept / Problem section ── */
+  .khead{margin-bottom:2rem;text-align:center}
+  .ksub{text-align:center;max-width:100%}
+  .prob-sticky-row{grid-template-columns:1fr;gap:2rem}
+  .prob-sticky-col{position:static}
+  .prob-sticky-h{font-size:clamp(1.2rem,5.5vw,1.6rem);margin-bottom:1rem}
+  .prob-sticky-sub{max-width:100%}
+  .pcard{padding:1.4rem 1.5rem}
+  .pcard:hover{transform:none}
+  .pcard-h{font-size:.98rem}
+  .pcard-t{font-size:.85rem}
+  .trust-qs{padding:1.25rem 1.25rem;margin-top:1.5rem}
+  .trust-q{font-size:.95rem}
+  .prob-bridge{max-width:100%;font-size:.9rem}
+
+  /* ── Solution tabs ── */
+  .sol-wrap{padding-top:2.5rem}
+  .sol-tabs{flex-direction:column;border-bottom:1px solid var(--br)}
+  .sol-tab{border-bottom:1px solid var(--br);padding:.85rem 1.25rem;font-size:.68rem}
+  .sol-panel-inner{grid-template-columns:1fr;gap:1.5rem;padding:2rem 0}
+  .sol-num{font-size:2.8rem}
+  .sol-h{font-size:1.15rem}
+  .sol-desc{font-size:.88rem}
+  .sol-ssub{font-size:.8rem}
+
+  /* ── Donate viz (canvases) ── */
+  .donate-viz{padding:1.25rem}
+  .tank-row{gap:1.25rem}
+  .tank-canvas{max-width:150px}
+
+  /* ── Was bleibt ── */
+  .wb-block{margin-top:3rem;padding-top:3rem}
+  .wb-list{grid-template-columns:1fr}
+  .wb-text{font-size:.9rem}
+
+  /* ── Video section ── */
+  .vid-inner{grid-template-columns:1fr;gap:2rem}
+  .vid-player video{max-width:100%;border-radius:0}
+  .vid-src-badge{top:8px;font-size:.55rem}
+  .vid-text h2{font-size:clamp(1.5rem,6vw,2.2rem)}
+  .vid-text p{font-size:.9rem;max-width:100%}
+  .vid-stats{gap:1.25rem;flex-wrap:wrap;margin-top:1.75rem;padding-top:1.75rem}
+  .vid-stat{min-width:5rem}
+  .vid-stat-num{font-size:1.8rem}
+  .vid-stat-lbl{font-size:.58rem}
+
+  /* ── Episode ── */
+  .ep-in h2{margin-bottom:2rem}
+  .ep-grid{grid-template-columns:1fr;gap:2rem}
+  .ep-wm{display:none}
+  .ep-text .intro{font-size:.97rem}
+  .ep-text .body{font-size:.88rem}
+  .ep-img img{aspect-ratio:16/9}
+  .ep-meta-row{padding:.75rem 1rem}
+  .em-val{font-size:.85rem}
+
+  /* ── Stats boxes ── */
+  .stats{grid-template-columns:1fr;margin-top:2rem}
+  .sbox{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);padding:1.5rem}
+  .sbox:last-child{border-bottom:none}
+  .sn{font-size:2.6rem}
+
+  /* ── Sponsor ── */
+  .sp-head{margin-bottom:2.5rem;padding-top:5.5rem}
+  .sp-logo-wrap{top:.5rem}
+  .sp-logo{height:52px}
+  .sp-product-wrap{right:-1rem;top:-1rem}
+  .sp-product{width:175px}
+  .sp-contrib{grid-template-columns:1fr}
+  .sp-item{padding:1.5rem}
+  .sp-item-title{font-size:1rem}
+
+  /* ── Mitmachen cards ── */
+  .mm-head{margin-bottom:2.5rem}
+  .mm-sub{font-size:.9rem}
+  .cards{grid-template-columns:1fr}
+  .card{padding:2rem}
+
+  /* ── Quote ── */
+  .main-quote{font-size:clamp(1.2rem,6vw,2rem)}
+
+  /* ── Footer ── */
+  .imp-sec{padding:2.5rem 1.25rem}
+  .imp-cols{grid-template-columns:1fr;gap:1.75rem}
+  footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.75rem;text-align:center}
+}
+@media(max-width:400px){
+  h1{font-size:clamp(1.6rem,7vw,2.4rem)}
+  .vid-stats{gap:1rem}
+  .vid-stat-num{font-size:1.6rem}
+  .sol-tab{font-size:.64rem;padding:.75rem 1rem}
+  .pcard{padding:1.25rem}
 }
 '''
 
@@ -430,10 +558,56 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
   },{threshold:0.3});
   io2.observe(cv);
 })();
+
+// Tab switching
+function switchTab(i){
+  var tabs=document.querySelectorAll('.sol-tab');
+  var panels=document.querySelectorAll('.sol-panel');
+  tabs.forEach(function(t,idx){t.classList.toggle('active',idx===i);});
+  panels.forEach(function(p,idx){p.classList.toggle('active',idx===i);});
+}
+
+// Stat counter scroll animation
+(function(){
+  function fmt(n,f){return f==='de'?n.toLocaleString('de-DE'):String(n);}
+  var cio=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el=e.target;
+      var target=parseInt(el.dataset.count);
+      var suffix=el.dataset.suffix||'';
+      var format=el.dataset.format||'';
+      var dur=1600,st=null;
+      function tick(ts){
+        if(!st) st=ts;
+        var p=Math.min((ts-st)/dur,1);
+        var ease=1-Math.pow(1-p,3);
+        el.textContent=fmt(Math.round(ease*target),format)+suffix;
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  },{threshold:0.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+})();
+
+// Parallax on #konzept heading
+(function(){
+  var h=document.querySelector('#konzept .konz-head');
+  if(!h) return;
+  window.addEventListener('scroll',function(){
+    var rect=h.getBoundingClientRect();
+    var offset=rect.top*0.18;
+    h.style.transform='translateY('+offset+'px)';
+  },{passive:true});
+})();
 '''
 
-def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src, video_src, logo_src=None):
-    return f'''<title>Rescue Stories — Ein Dokumentationsprojekt</title>
+def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src, video_src, logo_src=None, collar_src=None, rs_svg=''):
+    return f'''<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rescue Stories — Ein Dokumentationsprojekt</title>
 
 <style>
 {CSS}
@@ -441,12 +615,15 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
 </style>
 
 <nav>
-  <a class="logo" href="#">Rescue <b>Stories</b></a>
+  <a class="logo" href="#">{rs_svg if rs_svg else ''}Rescue <b>Stories</b></a>
   <div class="nav-right">
     <div class="lt" role="group" aria-label="Sprache / Language">
       <button class="lb on" id="bd" onclick="setL('de')">DE</button>
       <button class="lb" id="be" onclick="setL('en')">EN</button>
     </div>
+    <a class="ig-btn" href="https://www.instagram.com/rescuestories.de" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
     <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Theme wechseln">
       <svg id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg id="icon-moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -457,7 +634,7 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
 <section class="hero">
   <div class="hbg" aria-hidden="true"></div>
   <div class="hc">
-    <p class="hlabel"><span class="de">Über Rescue Organisations weltweit</span><span class="en">About rescue organisations worldwide</span></p>
+    <p class="hlabel"><span class="de">Rescue Organisations weltweit</span><span class="en">Rescue Organisations worldwide</span></p>
     <h1>
       <span class="de">Sie tun<br>Außergewöhnliches.<br><i>Niemand weiß es.</i></span>
       <span class="en">They do<br>extraordinary things.<br><i>Nobody knows.</i></span>
@@ -472,6 +649,10 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
         <span class="de">Entdecken</span><span class="en">Scroll</span>
       </div>
     </div>
+  </div>
+  <div class="hero-arrow" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Scroll</span>
   </div>
 </section>
 
@@ -510,80 +691,118 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
       </p>
     </div>
   </div>
-  <div class="prob-band r">
-    <div class="inn">
-      <span class="prob-band-label de">Das Grundproblem</span>
-      <span class="prob-band-label en">The core problem</span>
-      <div class="prob-grid">
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Keine Sichtbarkeit</span><span class="en">No visibility</span></p>
-          <p class="prob-item-text"><span class="de">Rescue Organisations haben kein Marketing-Budget und kein Team dafür. Also passiert — nichts. Potenzielle Unterstützer, Adoptanten und Spender wissen nicht, dass es sie gibt. Nicht weil die Arbeit fehlt, sondern weil niemand davon erzählt.</span><span class="en">Rescue organisations have no marketing budget and no team for it. So nothing happens. Potential supporters, adopters, and donors don't know they exist — not because the work isn't there, but because nobody's telling the story.</span></p>
-        </div>
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Kein Content, kein Kanal</span><span class="en">No content, no channel</span></p>
-          <p class="prob-item-text"><span class="de">Social Media ist heute der schnellste Weg, um Menschen zu erreichen und zu bewegen. Aber professionellen Content zu erstellen kostet Zeit, Geld und Know-how — alles Dinge, die Rescue Organisations nicht haben. Also bleibt der Kanal stumm. Und mit ihm die Geschichte, die eigentlich erzählt werden müsste.</span><span class="en">Social media is the fastest way to reach and move people today. But creating professional content takes time, money, and expertise — things rescue organisations simply don't have. So the channel stays silent. And with it: the story that deserves to be told.</span></p>
-        </div>
-        <div class="prob-item">
-          <p class="prob-item-head"><span class="de">Kein digitales Fundament</span><span class="en">No digital foundation</span></p>
-          <p class="prob-item-text"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
-        </div>
-      </div>
-      <div class="trust-qs r">
-        <p class="trust-intro">
-          <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
-          <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+  <!-- Problem section: sticky scroll + hover cards -->
+  <div class="prob-section">
+    <div class="prob-sticky-row">
+      <div class="prob-sticky-col r">
+        <span class="tag de">Das Grundproblem</span>
+        <span class="tag en">The core problem</span>
+        <p class="prob-sticky-h">
+          <span class="de">3 Gründe, warum gute Arbeit unsichtbar bleibt.</span>
+          <span class="en">3 reasons why great work stays invisible.</span>
         </p>
-        <div class="trust-q-list">
-          <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
-          <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
-          <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
-        </div>
+        <p class="prob-sticky-sub">
+          <span class="de">Und warum das kein Schicksal ist — sondern ein lösbares Problem.</span>
+          <span class="en">And why that's not fate — but a solvable problem.</span>
+        </p>
       </div>
-      <p class="prob-bridge">
-        <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
-        <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
-      </p>
+      <div class="prob-cards-col">
+        <div class="pcard r d1">
+          <span class="pcard-n">01</span>
+          <p class="pcard-h"><span class="de">Keine Sichtbarkeit</span><span class="en">No visibility</span></p>
+          <p class="pcard-t"><span class="de">Rescue Organisations haben kein Marketing-Budget und kein Team dafür. Also passiert — nichts. Potenzielle Unterstützer, Adoptanten und Spender wissen nicht, dass es sie gibt. Nicht weil die Arbeit fehlt, sondern weil niemand davon erzählt.</span><span class="en">Rescue organisations have no marketing budget and no team for it. So nothing happens. Potential supporters, adopters, and donors don't know they exist — not because the work isn't there, but because nobody's telling the story.</span></p>
+        </div>
+        <div class="pcard r d2">
+          <span class="pcard-n">02</span>
+          <p class="pcard-h"><span class="de">Kein Content, kein Kanal</span><span class="en">No content, no channel</span></p>
+          <p class="pcard-t"><span class="de">Social Media ist heute der schnellste Weg, um Menschen zu erreichen und zu bewegen. Aber professionellen Content zu erstellen kostet Zeit, Geld und Know-how — alles Dinge, die Rescue Organisations nicht haben. Also bleibt der Kanal stumm. Und mit ihm die Geschichte, die eigentlich erzählt werden müsste.</span><span class="en">Social media is the fastest way to reach and move people today. But creating professional content takes time, money, and expertise — things rescue organisations simply don't have. So the channel stays silent. And with it: the story that deserves to be told.</span></p>
+        </div>
+        <div class="pcard r d3">
+          <span class="pcard-n">03</span>
+          <p class="pcard-h"><span class="de">Kein digitales Fundament</span><span class="en">No digital foundation</span></p>
+          <p class="pcard-t"><span class="de">Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht zuerst deren Website. Findet er keine — oder eine, die unprofessionell wirkt — geht er wieder. Jede schlechte Website kostet diese Organisationen direkt Geld und Vertrauen.</span><span class="en">Someone who hears about an organisation and wants to donate or adopt will look for their website first. If they find nothing — or something that looks unprofessional — they leave. Every poor website costs these organisations money and trust.</span></p>
+        </div>
+        <div class="trust-qs r">
+          <p class="trust-intro">
+            <span class="de">Menschen, die eigentlich helfen, spenden oder adoptieren möchten, stellen sich plötzlich die entscheidenden Fragen:</span>
+            <span class="en">People who want to help, donate, or adopt suddenly ask themselves the critical questions:</span>
+          </p>
+          <div class="trust-q-list">
+            <p class="trust-q"><span class="de">„Ist diese Organisation seriös?"</span><span class="en">"Is this organisation legitimate?"</span></p>
+            <p class="trust-q"><span class="de">„Kommt meine Spende wirklich an?"</span><span class="en">"Does my donation actually reach them?"</span></p>
+            <p class="trust-q"><span class="de">„Kann ich ihr vertrauen?"</span><span class="en">"Can I trust them?"</span></p>
+          </div>
+        </div>
+        <p class="prob-bridge r">
+          <span class="de"><strong>Genau hier setzen wir an</strong> — mit einem Format, das alle drei Probleme gleichzeitig löst. Und dessen Wirkung weit über unseren Besuch hinausgeht.</span>
+          <span class="en"><strong>That's exactly where we come in</strong> — with a format that solves all three problems at once. And whose impact extends far beyond our visit.</span>
+        </p>
+      </div>
     </div>
   </div>
+  <!-- Solution tabs -->
   <div class="inn">
-    <div class="strips">
-      <div class="strip r d1">
-        <span class="snum">01</span>
-        <div>
-          <div class="stitle"><span class="de">Die Dokumentation</span><span class="en">The documentary</span></div>
-          <p class="ssub"><span class="de">Wir kommen, wir drehen, wir erzählen eure Geschichte.</span><span class="en">We come, we film, we tell your story.</span></p>
-        </div>
-        <p class="sdesc"><span class="de">Eine Woche lang sind wir wirklich dabei — nicht als Kamerateam, das seine Liste abarbeitet, sondern als Menschen, die verstehen wollen. Wir begleiten den Alltag im Shelter, lernen die Tiere kennen, hören den Menschen zu. Und irgendwo dazwischen entstehen die Momente, die man nicht planen kann — die echten. Das Ergebnis ist ein professionell produzierter Dokumentarfilm auf YouTube. Kein Spendenaufruf. Keine Werbung. Eine Geschichte, die bewegt — weil sie wahr ist.</span><span class="en">For a week, we're truly there — not as a camera crew working through a shot list, but as people who genuinely want to understand. We follow the shelter's everyday life, get to know the animals, listen to the people behind it all. And somewhere in between, the moments emerge that can't be planned — the real ones. The result: a professionally produced documentary on YouTube. Not a fundraiser video. Not an ad. A story that moves people — because it's true.</span></p>
+    <div class="sol-wrap r">
+      <span class="sol-label de">Die Lösung</span><span class="sol-label en">The solution</span>
+      <div class="sol-tabs" role="tablist">
+        <button class="sol-tab active" role="tab" onclick="switchTab(0)">
+          <span class="sol-tab-n">01</span>
+          <span class="de">Die Dokumentation</span><span class="en">The documentary</span>
+        </button>
+        <button class="sol-tab" role="tab" onclick="switchTab(1)">
+          <span class="sol-tab-n">02</span>
+          <span>Social Media &amp; Content</span>
+        </button>
+        <button class="sol-tab" role="tab" onclick="switchTab(2)">
+          <span class="sol-tab-n">03</span>
+          <span class="de">Die neue Website</span><span class="en">The new website</span>
+        </button>
       </div>
-      <div class="strip r d2">
-        <span class="snum">02</span>
-        <div>
-          <div class="stitle"><span class="de">Social Media &amp; Content</span><span class="en">Social Media &amp; Content</span></div>
-          <p class="ssub"><span class="de">Was bleibt, wenn wir wieder weg sind.</span><span class="en">What stays long after we leave.</span></p>
+      <div class="sol-panels">
+        <div class="sol-panel active">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">01</span>
+              <p class="sol-h"><span class="de">Die Dokumentation</span><span class="en">The documentary</span></p>
+              <p class="sol-ssub"><span class="de">Wir kommen, wir drehen, wir erzählen eure Geschichte.</span><span class="en">We come, we film, we tell your story.</span></p>
+            </div>
+            <p class="sol-desc"><span class="de">Eine Woche lang sind wir wirklich dabei — nicht als Kamerateam, das seine Liste abarbeitet, sondern als Menschen, die verstehen wollen. Wir begleiten den Alltag im Shelter, lernen die Tiere kennen, hören den Menschen zu. Und irgendwo dazwischen entstehen die Momente, die man nicht planen kann — die echten. Das Ergebnis ist ein professionell produzierter Dokumentarfilm auf YouTube. Kein Spendenaufruf. Keine Werbung. Eine Geschichte, die bewegt — weil sie wahr ist.</span><span class="en">For a week, we're truly there — not as a camera crew working through a shot list, but as people who genuinely want to understand. We follow the shelter's everyday life, get to know the animals, listen to the people behind it all. And somewhere in between, the moments emerge that can't be planned — the real ones. The result: a professionally produced documentary on YouTube. Not a fundraiser video. Not an ad. A story that moves people — because it's true.</span></p>
+          </div>
         </div>
-        <p class="sdesc"><span class="de">Nebenbei — aber alles andere als nebensächlich. Während der Dokumentarfilm entsteht, sammeln wir gleichzeitig Material, das einer Organisation Monate lang trägt: kurze Clips, Reels, Fotos — fertig für Instagram, Facebook und TikTok. Wir erarbeiten gemeinsam eine Strategie: Wer ist die Zielgruppe? Was wird gepostet, wann und warum? Wie baut man eine echte Community auf? Am Ende wissen sie nicht nur, wie es geht — sie haben es selbst erlebt. Für Organisationen, die es möchten, übernehmen wir danach auch die laufende Kanalbetreuung.</span><span class="en">As a side effect — but anything but secondary. While the documentary takes shape, we gather material that keeps giving for months: short clips, reels, photos — ready for Instagram, Facebook, and TikTok. Together we build a strategy: who is the audience, what gets posted, when and why, and how to grow a real community. By the end, they don't just know how it works — they've lived it. For organisations that want it, we can also take over ongoing channel management.</span></p>
-      </div>
-      <div class="strip r d3">
-        <span class="snum">03</span>
-        <div>
-          <div class="stitle"><span class="de">Die neue Website</span><span class="en">The new website</span></div>
-          <p class="ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
+        <div class="sol-panel">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">02</span>
+              <p class="sol-h">Social Media &amp; Content</p>
+              <p class="sol-ssub"><span class="de">Was bleibt, wenn wir wieder weg sind.</span><span class="en">What stays long after we leave.</span></p>
+            </div>
+            <p class="sol-desc"><span class="de">Nebenbei — aber alles andere als nebensächlich. Während der Dokumentarfilm entsteht, sammeln wir gleichzeitig Material, das einer Organisation Monate lang trägt: kurze Clips, Reels, Fotos — fertig für Instagram, Facebook und TikTok. Wir erarbeiten gemeinsam eine Strategie: Wer ist die Zielgruppe? Was wird gepostet, wann und warum? Wie baut man eine echte Community auf? Am Ende wissen sie nicht nur, wie es geht — sie haben es selbst erlebt. Für Organisationen, die es möchten, übernehmen wir danach auch die laufende Kanalbetreuung.</span><span class="en">As a side effect — but anything but secondary. While the documentary takes shape, we gather material that keeps giving for months: short clips, reels, photos — ready for Instagram, Facebook, and TikTok. Together we build a strategy: who is the audience, what gets posted, when and why, and how to grow a real community. By the end, they don't just know how it works — they've lived it. For organisations that want it, we can also take over ongoing channel management.</span></p>
+          </div>
         </div>
-        <div>
-          <p class="sdesc"><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
-          <div class="donate-viz">
-            <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
-            <div class="tank-row">
-              <div class="tank-item">
-                <canvas class="tank-canvas" id="tank-canvas"></canvas>
-                <span class="tank-lbl"><span class="de">Wasser · 65 %</span><span class="en">Water · 65 %</span></span>
-              </div>
-              <div class="tank-item">
-                <canvas class="tank-canvas" id="food-canvas"></canvas>
-                <span class="tank-lbl"><span class="de">Futter · 40 %</span><span class="en">Food · 40 %</span></span>
+        <div class="sol-panel">
+          <div class="sol-panel-inner">
+            <div>
+              <span class="sol-num">03</span>
+              <p class="sol-h"><span class="de">Die neue Website</span><span class="en">The new website</span></p>
+              <p class="sol-ssub"><span class="de">Das digitale Fundament, das Vertrauen schafft — und Spenden generiert.</span><span class="en">The digital foundation that builds trust — and generates donations.</span></p>
+            </div>
+            <div class="sol-desc">
+              <p><span class="de">Eine gute Website ist kein Luxus — sie ist Vertrauen. Wer von einer Organisation hört und spenden oder adoptieren möchte, sucht sie zuerst online. Findet er nichts, oder eine Seite, die Zweifel weckt, geht er wieder — leise, aber für immer. Wir bauen jeder Organisation ein digitales Zuhause, das hält: mit Spendensystem, einer Galerie der Tiere, die ein Zuhause suchen, und einer Geschichte, die Menschen wirklich bewegt. Alles so aufgebaut, dass die Organisation es langfristig selbst pflegen kann — ohne technisches Wissen, ohne externe Kosten.</span><span class="en">A good website isn't a luxury — it's trust. Someone who hears about an organisation and wants to donate or adopt will look them up online first. If they find nothing, or a page that raises doubts, they leave — quietly, but for good. We build each organisation a digital home that holds: a donation system, a gallery of animals waiting for a home, and a story that genuinely moves people. All built so the organisation can maintain it themselves long-term — no technical knowledge required, no ongoing costs.</span></p>
+              <div class="donate-viz">
+                <span class="dv-label"><span class="de">Beispiel: Ziel-Visualisierung auf der Rescue-Website</span><span class="en">Example: Goal visualisation on the rescue's website</span></span>
+                <div class="tank-row">
+                  <div class="tank-item">
+                    <canvas class="tank-canvas" id="tank-canvas"></canvas>
+                    <span class="tank-lbl"><span class="de">Wasser · 65 %</span><span class="en">Water · 65 %</span></span>
+                  </div>
+                  <div class="tank-item">
+                    <canvas class="tank-canvas" id="food-canvas"></canvas>
+                    <span class="tank-lbl"><span class="de">Futter · 40 %</span><span class="en">Food · 40 %</span></span>
+                  </div>
+                </div>
+                <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
               </div>
             </div>
-            <p class="dv-caption"><span class="de">Statt eines klassischen Spendenbuttons füllt sich ein konkretes Ziel mit jeder Spende sichtbar auf — greifbar, motivierend, direkt.</span><span class="en">Instead of a classic donate button, a concrete goal fills visibly with every donation — tangible, motivating, direct.</span></p>
           </div>
         </div>
       </div>
@@ -678,28 +897,27 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
 
 <section class="sp r">
   <div class="sp-inn">
+    <div class="sp-product-wrap">
+      {f'<img class="sp-product" src="{collar_src}" alt="Bullsland Dogwear Halsband">' if collar_src else ''}
+    </div>
+    <a class="sp-logo-wrap" href="https://www.bullsland.de/" target="_blank" rel="noopener" aria-label="Bullsland Dogwear Website">
+      {f'<img class="sp-logo" src="{logo_src}" alt="Bullsland Dogwear">' if logo_src else '<span class="sp-logo-text">Bullsland Dogwear</span>'}
+    </a>
     <div class="sp-head">
-      <div>
-        <span class="tag de">Pilot-Sponsor</span>
-        <span class="tag en">Pilot sponsor</span>
-        <h2 style="margin-top:.5rem">
-          <span class="de">Ohne Bullsland Dogwear<br><i>wäre Episode 01 nicht möglich.</i></span>
-          <span class="en">Without Bullsland Dogwear,<br><i>Episode 01 wouldn't happen.</i></span>
-        </h2>
-        <p class="ksub" style="margin-top:1.25rem">
-          <span class="de">Bullsland Dogwear ist eine deutsche Premium-Hundemarke — mit über 50.000 Kunden und einer 4,9-Sterne-Bewertung. Als Pilot-Sponsor machen sie Episode 01 möglich: mit konkreter Unterstützung statt leerer Versprechen.</span>
-          <span class="en">Bullsland Dogwear is a German premium dog brand — with over 50,000 customers and a 4.9-star rating. As pilot sponsor, they make Episode 01 possible: with concrete support, not empty promises.</span>
-        </p>
-        <a href="https://www.bullsland.de/" target="_blank" rel="noopener" class="btn acc" style="margin-top:1.5rem">
-          <span class="de">Shop besuchen</span><span class="en">Visit shop</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-        </a>
-      </div>
-      <div class="sp-logo-wrap">
-        <a href="https://www.bullsland.de/" target="_blank" rel="noopener" aria-label="Bullsland Dogwear Website">
-          {f'<img class="sp-logo" src="{logo_src}" alt="Bullsland Dogwear">' if logo_src else '<span class="sp-logo-text">Bullsland<br>Dogwear</span>'}
-        </a>
-      </div>
+      <span class="tag de">Pilot-Sponsor</span>
+      <span class="tag en">Pilot sponsor</span>
+      <h2 style="margin-top:.5rem">
+        <span class="de">Ohne Bullsland Dogwear<br><i>wäre Episode 01 nicht möglich.</i></span>
+        <span class="en">Without Bullsland Dogwear,<br><i>Episode 01 wouldn't happen.</i></span>
+      </h2>
+      <p class="ksub" style="margin-top:1.25rem;text-align:left;margin-left:0">
+        <span class="de">Bullsland Dogwear ist eine deutsche Premium-Hundemarke — mit über 50.000 Kunden und einer 4,9-Sterne-Bewertung. Als Pilot-Sponsor machen sie Episode 01 möglich: mit konkreter Unterstützung statt leerer Versprechen.</span>
+        <span class="en">Bullsland Dogwear is a German premium dog brand — with over 50,000 customers and a 4.9-star rating. As pilot sponsor, they make Episode 01 possible: with concrete support, not empty promises.</span>
+      </p>
+      <a href="https://www.bullsland.de/" target="_blank" rel="noopener" class="btn acc" style="margin-top:1.5rem">
+        <span class="de">Shop besuchen</span><span class="en">Visit shop</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
     </div>
     <div class="sp-contrib">
       <div class="sp-item">
@@ -786,22 +1004,38 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
 
 <section class="vid-sec">
   <div class="vid-inner">
-    <div class="vid-text r">
+    <div class="vid-player r">
+      <video controls playsinline preload="metadata">
+        <source src="{video_src}" type="video/mp4">
+      </video>
+      <span class="vid-src-badge">Instagram Original</span>
+    </div>
+    <div class="vid-text r d2">
       <span class="tag de">Die Abholung</span>
       <span class="tag en">The pickup</span>
       <h2>
-        <span class="de">Zwei Minuten, die <i>alles sagen.</i></span>
-        <span class="en">Two minutes that <i>say it all.</i></span>
+        <span class="de">Das ist Oreo — <i>hier hat alles begonnen.</i></span>
+        <span class="en">This is Oreo — <i>this is where it all started.</i></span>
       </h2>
       <p>
-        <span class="de">Zwei Minuten, die zeigen, worum es geht: echte Geschichten, echte Emotionen — und was passiert, wenn man einfach hinfährt und anfängt zu filmen.</span>
-        <span class="en">Two minutes that show what this is about: real stories, real emotions — and what happens when you simply go there and start filming.</span>
+        <span class="de">Ein Straßenhund. Gefunden, gerettet, gefilmt. Spontan gepostet — und über 100.000 Menschen haben zugeschaut.<br><br>Jede Rescue-Organisation hat hunderte solcher Geschichten. Geschichten, die Menschen bewegen, die Spenden auslösen, die Adoptionen anstoßen. Sie müssen nur richtig erzählt werden — und die Menschen interessieren sich dafür.<br><br>Wir wissen wie.</span>
+        <span class="en">A street dog. Found, rescued, filmed. Posted without a plan — and over 100,000 people watched.<br><br>Every rescue organisation has hundreds of stories like this. Stories that move people, trigger donations, start adoptions. They just need to be told the right way — and people genuinely care.<br><br>We know how.</span>
       </p>
-    </div>
-    <div class="vid-player r d2">
-      <video controls playsinline preload="metadata" style="width:100%;max-width:340px;aspect-ratio:9/16;display:block;background:#111">
-        <source src="{video_src}" type="video/mp4">
-      </video>
+      <div class="vid-stats">
+        <div class="vid-stat r d1">
+          <span class="vid-stat-num" data-count="100" data-suffix="K+">100K+</span>
+          <span class="vid-stat-lbl">Views</span>
+        </div>
+        <div class="vid-stat r d2">
+          <span class="vid-stat-num" data-count="7000" data-suffix="+" data-format="de">7.000+</span>
+          <span class="vid-stat-lbl">Likes</span>
+        </div>
+        <div class="vid-stat r d3">
+          <span class="vid-stat-num de">Organisch</span>
+          <span class="vid-stat-num en">Organic</span>
+          <span class="vid-stat-lbl"><span class="de">Reichweite</span><span class="en">reach</span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -830,7 +1064,7 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
         <span class="card-tag"><span class="de">Für alle</span><span class="en">For everyone</span></span>
         <h3><span class="de">Auf dem Laufenden bleiben</span><span class="en">Stay in the loop</span></h3>
         <p><span class="de">Folge dem Projekt auf Social Media. Wenn Episode 01 erscheint, ist jede Weitergabe ein direkter Beitrag für Kyrenia Animal Rescue.</span><span class="en">Follow the project on social media. When Episode 01 drops, every share is a direct contribution to Kyrenia Animal Rescue.</span></p>
-        <a class="btn" href="#"><span class="de">Folgen</span><span class="en">Follow us</span></a>
+        <a class="btn" href="https://www.instagram.com/rescuestories.de" target="_blank" rel="noopener"><span class="de">Folgen</span><span class="en">Follow us</span></a>
       </div>
     </div>
   </div>
@@ -847,8 +1081,8 @@ def make_html(hero_src, night_src, door_src, airport_src, couch_src, shelter_src
 </section>
 
 <footer>
-  <span>© 2026 Rescue Stories</span>
-  <span><a href="mailto:hello@rescuestories.com">hello@rescuestories.com</a> · <a href="#"><span class="de">Impressum</span><span class="en">Legal notice</span></a></span>
+  <span style="display:flex;align-items:center;gap:.75rem">{f'<span style="color:rgba(249,248,246,.5);display:flex;align-items:center;height:20px">{rs_svg}</span>' if rs_svg else ''}<span>© 2026 Rescue Stories — <span class="de">Ein Projekt von</span><span class="en">A project by</span> White Studios</span></span>
+  <span><a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a> · <a href="https://www.instagram.com/rescuestories.de" target="_blank" rel="noopener">Instagram</a> · <a href="impressum.html"><span class="de">Impressum</span><span class="en">Legal notice</span></a> · <a href="datenschutz.html"><span class="de">Datenschutz</span><span class="en">Privacy</span></a></span>
 </footer>
 
 <script>{JS}</script>'''
@@ -859,6 +1093,23 @@ def b64_any(path):
     with open(path, 'rb') as f:
         return f'data:{mime};base64,' + base64.b64encode(f.read()).decode()
 
+RS_SVG_PATH = f'{WEB}/../rescue-stories-logo.svg'
+RS_LOGO_SVG = ''
+if os.path.exists(RS_SVG_PATH):
+    with open(RS_SVG_PATH, 'r', encoding='utf-8') as _f:
+        _raw = _f.read()
+    # Strip XML declaration + comments, replace fill with currentColor
+    import re as _re
+    _raw = _re.sub(r'<\?xml[^>]+\?>', '', _raw)
+    _raw = _re.sub(r'<!--.*?-->', '', _raw, flags=_re.DOTALL)
+    _raw = _re.sub(r'<style[^>]*>.*?</style>', '', _raw, flags=_re.DOTALL)
+    _raw = _raw.replace('class="st0"', 'fill="currentColor"')
+    _raw = _re.sub(r'\s+', ' ', _raw).strip()
+    RS_LOGO_SVG = _raw
+    print('Rescue Stories SVG logo loaded.')
+else:
+    print('rescue-stories-logo.svg not found in assets/.')
+
 LOGO_PATH = f'{WEB}/../Bullsland-Dogwear-Logo.png'
 LOGO = b64_any(LOGO_PATH) if os.path.exists(LOGO_PATH) else None
 if LOGO:
@@ -866,8 +1117,15 @@ if LOGO:
 else:
     print('Logo not found — using text fallback. Drop bullsland-logo.png into the assets/ folder to embed it.')
 
+COLLAR_PATH = f'{WEB}/../Collar.png'
+COLLAR = b64_any(COLLAR_PATH) if os.path.exists(COLLAR_PATH) else None
+if COLLAR:
+    print('Collar image found and embedded.')
+else:
+    print('Collar image not found — drop Collar.png into assets/ to embed it.')
+
 # Artifact version: base64 images, relative video path (won't play in artifact but works locally)
-artifact_html = make_html(HERO, NIGHT, DOOR, AIRPORT, COUCH, SHELTER, 'assets/Oreo abholung.mp4', LOGO)
+artifact_html = make_html(HERO, NIGHT, DOOR, AIRPORT, COUCH, SHELTER, 'assets/oreo.MOV', LOGO, COLLAR, RS_LOGO_SVG)
 with open(OUT, 'w', encoding='utf-8') as f:
     f.write(artifact_html)
 print(f'Artifact: {len(artifact_html):,} chars ({len(artifact_html.encode())//1024}KB)')
@@ -885,10 +1143,159 @@ local_html = f'''<!DOCTYPE html>
     'assets/web/airport.jpg',
     'assets/web/couch.jpg',
     'assets/web/shelter.jpg',
-    'assets/web/oreo-abholung-web.mp4',
-    'assets/Bullsland-Dogwear-Logo.png' if os.path.exists(LOGO_PATH) else None
+    'assets/oreo.MOV',
+    'assets/Bullsland-Dogwear-Logo.png' if os.path.exists(LOGO_PATH) else None,
+    'assets/Collar.png' if os.path.exists(COLLAR_PATH) else None,
+    RS_LOGO_SVG
 ) + '''
 </html>'''
 with open(LOCAL, 'w', encoding='utf-8') as f:
     f.write(local_html)
 print(f'Local index.html written')
+
+LEGAL_CSS = '''
+:root{--w:#F9F8F6;--b:#0D0D0C;--a:#E8502A;--mid:#717170;--br:#E5E4E0;--t:#F3F2EF;--f:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+@media(prefers-color-scheme:dark){:root{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}}
+:root[data-theme="light"]{--w:#F9F8F6;--b:#0D0D0C;--br:#E5E4E0;--t:#F3F2EF;--mid:#717170}
+:root[data-theme="dark"]{--w:#111110;--b:#F2F1EF;--br:#272724;--t:#181817;--mid:#888885}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--w);color:var(--b);font-family:var(--f);-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(13,13,12,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#F9F8F6;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.logo svg{height:28px;width:auto;display:block;flex-shrink:0}
+.logo b{color:#E8502A}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.lt{display:flex;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;overflow:hidden}
+.lb{padding:.28rem .9rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:rgba(249,248,246,.55);cursor:pointer;border-radius:100px;font-family:var(--f);transition:all .18s}
+.lb.on{background:#E8502A;color:#fff}
+.theme-btn{width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:rgba(249,248,246,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0}
+.theme-btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-lang="en"] .de{display:none!important}
+:root[data-lang="de"] .en{display:none!important}
+.legal-wrap{max-width:780px;margin:0 auto;padding:5rem 2rem 7rem}
+.back{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);text-decoration:none;margin-bottom:3.5rem;transition:color .18s}
+.back:hover{color:var(--a)}
+.back svg{width:.85rem;height:.85rem;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.legal-tag{font-size:.67rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:1rem}
+.legal-h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.035em;line-height:1.06;color:var(--b);margin-bottom:3rem}
+.legal-block{padding:2rem 0;border-bottom:1px solid var(--br)}
+.legal-block:last-of-type{border-bottom:none}
+.legal-block-h{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:.75rem}
+.legal-block p{font-size:.95rem;color:var(--mid);line-height:1.78}
+.legal-block p+p{margin-top:.75rem}
+.legal-block a{color:var(--b);text-decoration:underline;text-underline-offset:3px}
+.legal-block a:hover{color:var(--a)}
+.legal-stand{font-size:.72rem;color:var(--mid);margin-top:3rem;padding-top:2rem;border-top:1px solid var(--br)}
+footer{border-top:1px solid var(--br);padding:1.5rem 2rem;font-size:.76rem;color:var(--mid);text-align:center}
+footer a{color:inherit;text-decoration:none}
+footer a:hover{color:var(--a)}
+@media(max-width:600px){.legal-wrap{padding:3rem 1.25rem 5rem}nav{padding:.85rem 1.25rem}}
+'''
+
+LEGAL_JS = '''
+function setL(l){document.documentElement.dataset.lang=l;document.getElementById('bd').classList.toggle('on',l==='de');document.getElementById('be').classList.toggle('on',l==='en');}
+function applyTheme(t){document.documentElement.dataset.theme=t;document.getElementById('icon-sun').style.display=t==='dark'?'block':'none';document.getElementById('icon-moon').style.display=t==='light'?'block':'none';}
+function toggleTheme(){const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);localStorage.setItem('rs-theme',next);}
+(function(){const t=localStorage.getItem('rs-theme')||'dark';applyTheme(t);const l=localStorage.getItem('rs-lang')||'de';document.documentElement.dataset.lang=l;document.getElementById('bd').classList.toggle('on',l==='de');document.getElementById('be').classList.toggle('on',l==='en');})();
+'''
+
+LEGAL_NAV = '''<nav>
+  <a class="logo" href="index.html">Rescue <b>Stories</b></a>
+  <div class="nav-right">
+    <div class="lt" role="group">
+      <button class="lb on" id="bd" onclick="setL('de')">DE</button>
+      <button class="lb" id="be" onclick="setL('en')">EN</button>
+    </div>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Theme wechseln">
+      <svg id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>'''
+
+LEGAL_FOOTER = '''<footer>© 2026 Rescue Stories — White Studios · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>'''
+
+# Inject Rescue Stories SVG into legal nav + footer
+if RS_LOGO_SVG:
+    LEGAL_NAV = LEGAL_NAV.replace('Rescue <b>Stories</b>', RS_LOGO_SVG + 'Rescue <b>Stories</b>', 1)
+    LEGAL_FOOTER = LEGAL_FOOTER.replace(
+        '© 2026',
+        f'<span style="display:inline-flex;align-items:center;gap:.6rem;color:rgba(249,248,246,.5)"><span style="height:18px;display:flex;align-items:center">{RS_LOGO_SVG}</span>© 2026',
+        1
+    ).replace('</footer>', '</span></footer>', 1)
+
+def make_legal_page(title_de, title_en, tag_de, tag_en, body_html):
+    return f'''<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title_de} — Rescue Stories</title>
+<style>{LEGAL_CSS}</style>
+</head>
+<body>
+{LEGAL_NAV}
+<main class="legal-wrap">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><span class="de">Zurück</span><span class="en">Back</span></a>
+  <span class="legal-tag"><span class="de">{tag_de}</span><span class="en">{tag_en}</span></span>
+  <h1 class="legal-h1"><span class="de">{title_de}</span><span class="en">{title_en}</span></h1>
+{body_html}
+</main>
+{LEGAL_FOOTER}
+<script>{LEGAL_JS}</script>
+</body>
+</html>'''
+
+IMPRESSUM_BODY = '''  <div class="legal-block">
+    <p class="legal-block-h">Angaben gemäß § 5 TMG</p>
+    <p>White Studios<br>Inhaber: Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">Kontakt</p>
+    <p><a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a></p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h"><span class="de">Verantwortlich für den Inhalt</span><span class="en">Responsible for content</span></p>
+    <p>Tayfun Bayram<br>An der Hasenkaule 10<br>50354 Hürth</p>
+  </div>
+  <p class="legal-stand">Stand: August 2026</p>'''
+
+DSE_BODY = '''  <div class="legal-block">
+    <p class="legal-block-h">1. Verantwortlicher</p>
+    <p>White Studios, Inhaber: Tayfun Bayram, An der Hasenkaule 10, 50354 Hürth<br>E-Mail: <a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a></p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">2. Hosting — Vercel</p>
+    <p>Diese Website wird gehostet von Vercel Inc., 340 Pine Street, Suite 701, San Francisco, CA 94104, USA. Beim Besuch der Website erfasst Vercel automatisch Server-Log-Dateien (IP-Adresse, Zeitpunkt des Zugriffs, aufgerufene URL, Browser, Betriebssystem). Diese Daten dienen ausschließlich dem sicheren Betrieb der Website und werden nicht mit anderen Datenquellen zusammengeführt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Da Vercel ein US-Unternehmen ist, kann es zu einer Datenübermittlung in die USA kommen; Vercel ist nach dem EU-US Data Privacy Framework zertifiziert.</p>
+    <p>Weitere Informationen: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a></p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">3. Kontaktaufnahme per E-Mail</p>
+    <p>Wenn Sie uns per E-Mail kontaktieren, werden die übermittelten Daten (E-Mail-Adresse, ggf. Name und Nachrichteninhalt) gespeichert, um Ihre Anfrage zu bearbeiten. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald Ihre Anfrage abschließend bearbeitet wurde.</p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">4. Keine Cookies, kein Tracking</p>
+    <p>Diese Website verwendet keine Cookies und setzt keinerlei Analyse- oder Tracking-Tools ein (kein Google Analytics, kein Meta Pixel o. ä.). Es werden keine Nutzungsprofile erstellt. Eine Cookie-Einwilligung ist nicht erforderlich.</p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">5. Ihre Rechte als betroffene Person</p>
+    <p>Sie haben jederzeit das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch gegen die Verarbeitung (Art. 21 DSGVO).</p>
+    <p>Zur Ausübung dieser Rechte: <a href="mailto:info@whitestudios-marketing.com">info@whitestudios-marketing.com</a></p>
+  </div>
+  <div class="legal-block">
+    <p class="legal-block-h">6. Beschwerderecht bei der Aufsichtsbehörde</p>
+    <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig für Nordrhein-Westfalen:<br>Landesbeauftragte für Datenschutz und Informationsfreiheit NRW, Postfach 20 04 44, 40102 Düsseldorf<br><a href="https://www.ldi.nrw.de" target="_blank" rel="noopener">www.ldi.nrw.de</a></p>
+  </div>
+  <p class="legal-stand">Stand: August 2026</p>'''
+
+IMP_LOCAL  = '/Users/tayfunb./Documents/Rescue Dog Dokumentation/impressum.html'
+DSE_LOCAL  = '/Users/tayfunb./Documents/Rescue Dog Dokumentation/datenschutz.html'
+
+with open(IMP_LOCAL, 'w', encoding='utf-8') as f:
+    f.write(make_legal_page('Impressum', 'Legal notice', 'Rechtliches', 'Legal', IMPRESSUM_BODY))
+print('impressum.html written')
+
+with open(DSE_LOCAL, 'w', encoding='utf-8') as f:
+    f.write(make_legal_page('Datenschutzerklärung', 'Privacy policy', 'Datenschutz', 'Privacy', DSE_BODY))
+print('datenschutz.html written')
